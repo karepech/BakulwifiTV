@@ -4,8 +4,8 @@ import axios from "axios";
 
 /*
   generate-raw-grouped.js 
-  - FINAL FIX: Memisahkan Live Event (H0) dan Upcoming Event (H+1/H+2) secara ketat.
-  - Menulis detail Event (Nama Tim, Jam WIB, Tanggal) sebagai header M3U yang dapat dibaca player.
+  - FINAL KOREKSI: Memastikan tag waktu [HH:MM WIB] muncul di nama channel di grup LIVE EVENT.
+  - Memisahkan event Live (H0) dan Upcoming (H+1/H+2).
 */
 
 // Sumber M3U utama dari file lokal repositori Anda
@@ -31,13 +31,14 @@ function formatDateForM3U(date) {
 function convertUtcToWib(utcTime, dateString) {
     if (!utcTime) return "Waktu Tidak Tersedia";
     
+    // Parse date parts and convert to UTC Date object
     const [year, month, day] = dateString.split('-');
-    // Membuat objek Date berdasarkan UTC
-    const dateTimeUtc = new Date(Date.UTC(year, month - 1, day, parseInt(utcTime.slice(0, 2)), parseInt(utcTime.slice(3, 5))));
+    const dateTimeUtc = new Date(Date.UTC(parseInt(year), parseInt(month) - 1, parseInt(day), parseInt(utcTime.slice(0, 2)), parseInt(utcTime.slice(3, 5))));
 
     // WIB adalah UTC+7
     dateTimeUtc.setHours(dateTimeUtc.getHours() + 7);
 
+    // Format jam: HH:MM WIB
     const hours = String(dateTimeUtc.getHours()).padStart(2, '0');
     const minutes = String(dateTimeUtc.getMinutes()).padStart(2, '0');
     
@@ -136,7 +137,7 @@ function extractChannelsFromM3U(m3u, sourceTag) {
 }
 
 /**
- * MODIFIKASI: Memisahkan keywords dan events menjadi grup LIVE dan UPCOMING.
+ * Memisahkan keywords dan events menjadi grup LIVE dan UPCOMING.
  */
 async function fetchAndGroupEvents() {
     const dates = getFutureDates();
@@ -156,15 +157,14 @@ async function fetchAndGroupEvents() {
                 
                 events.forEach(ev => {
                     const wibTime = convertUtcToWib(ev.strTime, ev.dateEvent);
-                    // Detail event untuk M3U header
                     const eventDetail = `${ev.strHomeTeam} vs ${ev.strAwayTeam} (${wibTime}) - ${d.dateKey}`;
 
                     targetGroup.events.push({
                         detail: eventDetail,
-                        keywords: [ev.strHomeTeam, ev.strAwayTeam, ev.strLeague, ev.strEvent]
+                        keywords: [ev.strHomeTeam, ev.strAwayTeam, ev.strLeague, ev.strEvent],
+                        timeWib: wibTime
                     });
                     
-                    // Kumpulkan semua keywords ke set besar
                     if (ev.strHomeTeam) targetGroup.keywords.add(ev.strHomeTeam);
                     if (ev.strAwayTeam) targetGroup.keywords.add(ev.strAwayTeam);
                     if (ev.strLeague) targetGroup.keywords.add(ev.strLeague);
@@ -176,11 +176,10 @@ async function fetchAndGroupEvents() {
         }
     }
     
-    // DEBUG/TEST HACK: Tambahkan event statis ke grup LIVE
+    // HACK: Menambahkan keyword umum (tanpa event detail) untuk meningkatkan Live matching
     groupedEvents.live.keywords.add("bein sports");
     groupedEvents.live.keywords.add("premier league"); 
     groupedEvents.live.keywords.add("spotv");
-    groupedEvents.live.events.push({ detail: `TEST EVENT: Channel Match Testing (LIVE) - ${formatDateForM3U(new Date())}` });
 
     return groupedEvents;
 }
@@ -207,7 +206,7 @@ function channelMatchesKeywords(channelName, eventKeywords, channelMap) {
 // ========================== MAIN ==========================
 
 async function main() {
-  console.log("Starting generate-raw-grouped.js (Final Separated Groups)...");
+  console.log("Starting generate-raw-grouped.js (Final Time Tag Fix)...");
 
   const channelMap = loadChannelMap();
 
@@ -265,9 +264,21 @@ async function main() {
 
   for (const ch of onlineChannels) {
       if (!addedChannelIds.has(ch.uniqueId) && channelMatchesKeywords(ch.name, liveKeywords, channelMap)) {
+          
+          // Cari event terdekat yang cocok untuk tag waktu
+          const matchingEvent = liveEventsList.find(event => channelMatchesKeywords(ch.name, event.keywords, channelMap));
+          // [HH:MM] WIB
+          const timeTag = matchingEvent ? `[${matchingEvent.timeWib.split(' ')[0]}] ` : ''; 
+          
           if (ch.vlcOpts.length > 0) output.push(...ch.vlcOpts);
           
-          output.push(ch.extinf.replace(/group-title="[^"]*"/g, `group-title="⚽ LIVE EVENT"`));
+          // Dapatkan nama channel asli (tanpa group title)
+          const originalChannelName = ch.extinf.match(/,(.*)$/)[1].trim();
+
+          // Tambahkan tag waktu ke nama channel
+          const newExtInf = ch.extinf.replace(/,(.*)$/, `, ${timeTag}${originalChannelName}`);
+
+          output.push(newExtInf.replace(/group-title="[^"]*"/g, `group-title="⚽ LIVE EVENT"`));
           output.push(ch.url);
           addedChannelIds.add(ch.uniqueId);
           liveEventCount++;
@@ -289,7 +300,6 @@ async function main() {
   });
 
   for (const ch of onlineChannels) {
-      // Pastikan channel ini belum ditambahkan ke grup LIVE (A)
       if (!addedChannelIds.has(ch.uniqueId) && channelMatchesKeywords(ch.name, upcomingKeywords, channelMap)) {
           if (ch.vlcOpts.length > 0) output.push(...ch.vlcOpts);
           
