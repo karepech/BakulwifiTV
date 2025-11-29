@@ -6,7 +6,7 @@ on:
     branches:
       - main
   schedule:
-    # Jalan setiap hari pada jam 03:00 UTC (disesuaikan sesuai kebutuhan Anda)
+    # Jalan setiap hari pada jam 03:00 UTC (sesuaikan waktu sesuai kebutuhan Anda)
     - cron: '0 3 * * *' 
   workflow_dispatch:
 
@@ -23,27 +23,22 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20' # Gunakan versi Node yang stabil
+          node-version: '20'
 
-      # 3. Install dependensi dari package.json (axios, node-fetch)
+      # 3. Install dependensi dari package.json
       - name: Install dependencies
         run: npm install
 
-      # 4. Jalankan Skrip Utama (Pilih Salah Satu)
-      #    Jika Anda menggunakan generate-live-pro.js:
-      - name: Run M3U Generator (Pro Live)
-        run: node generate-live-pro.js 
-        # Atau jika Anda menggunakan generate-live.js:
-        # run: node generate-live.js 
+      # 4. Jalankan Skrip Utama
+      - name: Run M3U Generator (Raw Grouped)
+        run: node generate-raw-grouped.js 
         
-      # 5. Commit dan Push file output (live-event-pro.m3u dan stats)
+      # 5. Commit dan Push file output 
       - name: Commit and Push new M3U and Stats
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          # Tentukan file output yang dihasilkan oleh skrip
-          file_pattern: 'live-event-pro.m3u live-event-pro-stats.json'
-          # Ganti live-event-pro.* dengan live-all-online.* jika Anda menggunakan generate-live.js
-          commit_message: "Automatic M3U update based on live events and channel status"
+          # Pastikan file_pattern ini sesuai dengan output skrip baru
+          file_pattern: 'live-raw-grouped.m3u live-raw-stats.json'
+          commit_message: "Automatic M3U update based on live events (Raw Grouped)"
           commit_user_name: Live M3U Bot
           commit_user_email: actions@github.com
-
