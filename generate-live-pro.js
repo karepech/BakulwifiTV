@@ -5,11 +5,9 @@ import axios from "axios";
 /*
   generate-live-pro.js 
   - Mengambil channel dan mengecek status (Online/Offline).
+  - MENGINKLUSI EXTVLCOPT untuk meningkatkan keberhasilan streaming.
   - Mengambil jadwal event sepak bola hari ini dan 2 hari mendatang dari TheSportsDB.
-  - Menghasilkan M3U dengan tiga grup utama:
-      1. ⚽ LIVE EVENT ⚽ (Channel yang cocok dengan event hari ini)
-      2. 📅 UPCOMING EVENTS (Channel yang cocok dengan event mendatang dalam 2 hari)
-      3. ⚡ ALL ONLINE CHANNELS (Semua channel aktif lainnya)
+  - Menghasilkan M3U dengan pengelompokan event cerdas.
 */
 
 const SOURCE_M3US = [
@@ -17,7 +15,7 @@ const SOURCE_M3US = [
   "https://bakulwifi.my.id/bw.m3u",
   "https://bakulwifi.my.id/live.m3u"
 ];
-const MAX_DAYS_AHEAD = 2; // Cek acara untuk Hari Ini, Besok, dan Lusa
+const MAX_DAYS_AHEAD = 2;
 
 // ======================= HELPER FUNCTIONS =======================
 
@@ -68,22 +66,48 @@ async function headOk(url) {
   }
 }
 
+/**
+ * MODIFIKASI: Mengekstrak EXTVLCOPT dan KODIPROP sebelum URL.
+ */
 function extractChannelsFromM3U(m3u) {
   const lines = m3u.split(/\r?\n/);
   const channels = [];
-  for (let i = 0; i < lines.length; i++) {
-    const l = lines[i].trim();
-    if (l.startsWith("#EXTINF")) {
-      const namePart = l.split(",")[1] || l;
-      const url = (lines[i + 1] || "").trim();
-      if (url.startsWith("http")) {
-        // Gunakan url sebagai id unik
-        channels.push({ extinf: l, name: namePart.trim(), url }); 
-      }
+  
+  let currentExtInf = null;
+  let currentVlcOpts = [];
+  
+  for (const l of lines) {
+    const trimmedLine = l.trim();
+
+    if (trimmedLine.startsWith("#EXTINF")) {
+      // Ini adalah tag EXTINF baru.
+      currentExtInf = trimmedLine;
+      currentVlcOpts = []; // Reset options untuk channel baru
+
+    } else if (trimmedLine.startsWith("#EXTVLCOPT") || trimmedLine.startsWith("#KODIPROP")) {
+      // Kumpulkan semua options/props.
+      currentVlcOpts.push(trimmedLine);
+      
+    } else if (trimmedLine.startsWith("http") && currentExtInf) {
+      // Ini adalah URL stream, jadi channel sudah lengkap.
+      const namePart = currentExtInf.split(",")[1] || currentExtInf;
+      
+      channels.push({ 
+          extinf: currentExtInf, 
+          name: namePart.trim(), 
+          url: trimmedLine,
+          // Simpan semua options/props sebagai satu string
+          vlcOpts: currentVlcOpts.join('\n') 
+      });
+      
+      currentExtInf = null; // Reset state
+      currentVlcOpts = [];
     }
+    // Abaikan baris lain (seperti komentar atau #EXTM3U)
   }
   return channels;
 }
+
 
 async function fetchUpcomingEvents() {
     const dates = getFutureDates();
@@ -160,109 +184,4 @@ async function main() {
 
   // --- Langkah 2: Pre-check Status Online ---
   const onlineChannels = [];
-  const onlineCheckPromises = unique.map(async (ch) => {
-    const ok = await headOk(ch.url);
-    if (ok) {
-        onlineChannels.push(ch);
-    } 
-  });
-
-  await Promise.all(onlineCheckPromises);
-  console.log("Total channels verified as ONLINE:", onlineChannels.length);
-
-
-  // --- Langkah 3: Ambil Jadwal Event & Kelompokkan ---
-  const events = await fetchUpcomingEvents();
-  const eventsByDate = buildEventKeywords(events);
-
-  // --- Langkah 4: Kumpulkan Hasil Output ke Grup-grup ---
-  const output = ["#EXTM3U"];
-  const addedUrls = new Set();
-  
-  // A. Grup LIVE EVENT (Events Hari Ini)
-  const todayDateKey = formatDateForM3U(new Date());
-  output.push(`\n#EXTINF:-1 group-title="⚽ LIVE EVENT - ${todayDateKey}", SEDANG BERLANGSUNG`);
-  let liveEventCount = 0;
-
-  if (eventsByDate.has(todayDateKey)) {
-    const todayEvents = eventsByDate.get(todayDateKey).keywords;
-    for (const ch of onlineChannels) {
-        if (!addedUrls.has(ch.url) && channelMatchesKeywords(ch.name, todayEvents)) {
-            // Ubah group-title ke LIVE EVENT
-            output.push(ch.extinf.replace(/group-title="[^"]*"/g, `group-title="⚽ LIVE EVENT - ${todayDateKey}"`));
-            output.push(ch.url);
-            addedUrls.add(ch.url);
-            liveEventCount++;
-        }
-    }
-  }
-
-  // B. Grup UPCOMING EVENTS
-  let upcomingEventCount = 0;
-  for (const [dateKey, data] of eventsByDate) {
-    if (dateKey !== todayDateKey) {
-        // Tambahkan Header Tanggal Event Mendatang
-        output.push(`\n#EXTINF:-1 group-title="📅 UPCOMING EVENTS", ${dateKey}`);
-        
-        // Tambahkan list pertandingan sebagai placeholder dalam M3U
-        data.events.slice(0, 5).forEach(e => {
-            output.push(`#EXTINF:-1 tvg-name="UPCOMING EVENT", ${e}`);
-        });
-        
-        // Tambahkan channel yang cocok dengan event mendatang
-        for (const ch of onlineChannels) {
-            if (!addedUrls.has(ch.url) && channelMatchesKeywords(ch.name, data.keywords)) {
-                // Ubah group-title ke UPCOMING EVENTS
-                output.push(ch.extinf.replace(/group-title="[^"]*"/g, `group-title="📅 UPCOMING EVENTS"`));
-                output.push(ch.url);
-                addedUrls.add(ch.url);
-                upcomingEventCount++;
-            }
-        }
-    }
-  }
-
-  // C. Grup ALL ONLINE CHANNELS (Semua Channel Online lainnya)
-  output.push(`\n#EXTINF:-1 group-title="⚡ ALL ONLINE CHANNELS", ${onlineChannels.length - addedUrls.size} Channel Aktif Lainnya`);
-  let allOnlineCount = 0;
-  for (const ch of onlineChannels) {
-    if (!addedUrls.has(ch.url)) {
-        // Ubah group-title ke ALL ONLINE CHANNELS
-        output.push(ch.extinf.replace(/group-title="[^"]*"/g, `group-title="⚡ ALL ONLINE CHANNELS"`));
-        output.push(ch.url);
-        addedUrls.add(ch.url);
-        allOnlineCount++;
-    }
-  }
-  
-  // --- Langkah 5: Tulis file M3U dan Statistik ---
-  const FILENAME_M3U = "live-event-pro.m3u";
-  const FILENAME_STATS = "live-event-pro-stats.json";
-
-  fs.writeFileSync(FILENAME_M3U, output.join("\n") + "\n");
-
-  const stats = {
-    fetched: allChannels.length,
-    unique: unique.length,
-    onlineTotal: onlineChannels.length,
-    onlineLiveEvent: liveEventCount,
-    onlineUpcoming: upcomingEventCount,
-    onlineGeneral: allOnlineCount,
-    generatedAt: new Date().toISOString()
-  };
-
-  fs.writeFileSync(FILENAME_STATS, JSON.stringify(stats, null, 2));
-
-  console.log("\n=== SUMMARY ===");
-  console.log("Total Channels Verified Online:", onlineChannels.length);
-  console.log("Channels in 'LIVE EVENT' group:", liveEventCount);
-  console.log("Channels in 'UPCOMING EVENTS' group:", upcomingEventCount);
-  console.log("Channels in 'ALL ONLINE CHANNELS' group:", allOnlineCount);
-  console.log("Generated", FILENAME_M3U);
-  console.log("Stats saved to", FILENAME_STATS);
-}
-
-main().catch(err => {
-  console.error("Fatal error:", err);
-  process.exit(1);
-});
+  const onlineCheckPromises = unique.map(
