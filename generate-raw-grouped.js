@@ -4,8 +4,7 @@ import axios from "axios";
 
 /*
   generate-raw-grouped.js 
-  - FINAL FIX: Memisahkan Live Event (H0) dan Upcoming Event (H+1/H+2) secara ketat.
-  - Menulis detail Event (Nama Tim, Jam WIB, Tanggal) sebagai header M3U yang dapat dibaca player.
+  - FINAL PRODUKSI: Menghilangkan HACK pengujian statis. Hanya menampilkan jadwal pertandingan yang sesungguhnya (Live H0 dan Upcoming H+1/H+2).
 */
 
 // Sumber M3U utama dari file lokal repositori Anda
@@ -33,7 +32,7 @@ function convertUtcToWib(utcTime, dateString) {
     
     const [year, month, day] = dateString.split('-');
     // Membuat objek Date berdasarkan UTC
-    const dateTimeUtc = new Date(Date.UTC(year, month - 1, day, parseInt(utcTime.slice(0, 2)), parseInt(utcTime.slice(3, 5))));
+    const dateTimeUtc = new Date(Date.UTC(parseInt(year), parseInt(month) - 1, parseInt(day), parseInt(utcTime.slice(0, 2)), parseInt(utcTime.slice(3, 5))));
 
     // WIB adalah UTC+7
     dateTimeUtc.setHours(dateTimeUtc.getHours() + 7);
@@ -136,7 +135,7 @@ function extractChannelsFromM3U(m3u, sourceTag) {
 }
 
 /**
- * MODIFIKASI: Memisahkan keywords dan events menjadi grup LIVE dan UPCOMING.
+ * Memisahkan keywords dan events menjadi grup LIVE dan UPCOMING tanpa event statis.
  */
 async function fetchAndGroupEvents() {
     const dates = getFutureDates();
@@ -164,7 +163,6 @@ async function fetchAndGroupEvents() {
                         keywords: [ev.strHomeTeam, ev.strAwayTeam, ev.strLeague, ev.strEvent]
                     });
                     
-                    // Kumpulkan semua keywords ke set besar
                     if (ev.strHomeTeam) targetGroup.keywords.add(ev.strHomeTeam);
                     if (ev.strAwayTeam) targetGroup.keywords.add(ev.strAwayTeam);
                     if (ev.strLeague) targetGroup.keywords.add(ev.strLeague);
@@ -176,12 +174,6 @@ async function fetchAndGroupEvents() {
         }
     }
     
-    // DEBUG/TEST HACK: Tambahkan event statis ke grup LIVE
-    groupedEvents.live.keywords.add("bein sports");
-    groupedEvents.live.keywords.add("premier league"); 
-    groupedEvents.live.keywords.add("spotv");
-    groupedEvents.live.events.push({ detail: `TEST EVENT: Channel Match Testing (LIVE) - ${formatDateForM3U(new Date())}` });
-
     return groupedEvents;
 }
 
