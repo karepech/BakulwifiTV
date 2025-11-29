@@ -1,4 +1,4 @@
-#EXTM3U url-version="2025-11-29T16:14:54.382Z"
+#EXTM3U url-version="2025-11-29T16:33:52.252Z"
 
 #EXTINF:-1 group-title="⚽ LIVE EVENT", HARI INI - 1 Event
 #EXTINF:-1 tvg-name="LIVE INFO", Melbourne Victory vs Western Sydney Wanderers FC (15:40 WIB) - 29-11-2025
@@ -13,6 +13,27 @@ https://d6m3sfa7e58z5.cloudfront.net/out/v1/3b0660e05eed4d769521eb0275aab3ab/ind
 https://raw.githubusercontent.com/DonzCompIndonesia/donztelevision/refs/heads/main/v1/bEIN2.m3u8
 #EXTINF:-1 group-title="⚽ LIVE EVENT" tvg-logo="https://i.imgur.com/BGu4tAb.jpg", BEIN SPORTS 3 BUNDES LIGA
 https://raw.githubusercontent.com/DonzCompIndonesia/donztelevision/refs/heads/main/v1/BS3.m3u8
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:101.0) Gecko/20100101 Firefox/101.0
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=d0f2e5c39e70c18f29bf77768a1ad89a:d6853c51fcf37a18905f0609972395d7
+#EXTINF:-1 group-title="⚽ LIVE EVENT" tvg-logo="https://i.imgur.com/v002hpu.jpg", TNT SPORTS 1
+https://a201aivottlinear-a.akamaihd.net/OTTB/lhr-nitro/live/dash/enc/bsaaetko8v/out/v1/bd3b0c314fff4bb1ab4693358f3cd2d3/cenc.mpd
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:101.0) Gecko/20100101 Firefox/101.0
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=9f51f3dc6313ac8bc668e2d9d1c04dfa:74bc63e5a193454a91ca494975db33f9
+#EXTINF:-1 group-title="⚽ LIVE EVENT" tvg-logo="https://i.imgur.com/25GGdCq.jpg", TNT SPORTS 2
+https://a151aivottlinear-a.akamaihd.net/OTTB/lhr-nitro/live/dash/enc/f0qvkrra8j/out/v1/f8fa17f087564f51aa4d5c700be43ec4/cenc.mpd
+#EXTINF:-1  tvg-logo="https://i.imgur.com/IKC778N.jpg" group-title="⚽ LIVE EVENT", SKY SPORTS+
+https://a1xs.vip/2000012
+#EXTINF:-1 tvg-logo="https://i.imgur.com/BsoxyN8.jpg" group-title="⚽ LIVE EVENT", SKY SPORTS EPL
+https://a1xs.vip/120004
+#EXTVLCOPT:http-user-agent=Dalvik/2.1.0 (Linux; U; Android 12; sti6140d360 Build/QT) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 TV Safari/537.36
+#EXTINF:-1  tvg-logo="https://i.imgur.com/dLgQjem.jpg" group-title="⚽ LIVE EVENT", SKY SPORTS MOTO GP
+http://tv.8dott.xyz:80/live/samuel/samuel123456/846192.ts
+#EXTINF:-1  tvg-logo="https://i.imgur.com/9jcvlfu.jpg" group-title="⚽ LIVE EVENT", SKY SPORTS F1
+http://line.extraott-iptv.com:88/2755789541/1300714776/153701
+#EXTINF:-1 tvg-logo="https://i.imgur.com/sYp5eoL.jpg" group-title="⚽ LIVE EVENT", SKY SPORTS MAIN
+http://line.stayconnected.pro:80/play/live.php?mac=00:1A:79:39:37:34&stream=1608071&extension=ts&play_token=Yq2ejQhCtj
 #EXTINF:-1 tvg-id="154.astro" tvg-name="Astro Premier League 1 HD" tvg-logo="https://i.imgur.com/veerXrn.jpg" group-title="⚽ LIVE EVENT", ASTRO PREMIER LEAGUE 1 ᴴᴰ
 http://tv.8dott.xyz:80/live/samuel/samuel123456/709263.ts
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36
@@ -72,6 +93,20 @@ http://live-edge-th136.myjktv.com/watch/live.m3u8?video=spotv_on_540&sid=22M3puE
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36
 #EXTINF:-1 group-title="⚽ LIVE EVENT" tvg-id="spotvprime.kr" tvg-logo="https://i.imgur.com/l3J71cD.jpg", SPOTV PRIME PLUS
 http://live-edge-th136.myjktv.com/watch/live.m3u8?video=spotv_prime_540&sid=vs3q0KnoaggBafKcq0PCBjhXC7mRqtyFtkn54RON&secret=66d397ec1f0030b4ee7f4a63d109f4c6&time=1737314920|Referer=https://kakotv.com/
+#EXTINF:-1 tvg-id="" tvg-logo="https://i.imgur.com/xp7gQ8o.jpg" group-title="⚽ LIVE EVENT", SKY SPORTS PREMIERE LEAGUE
+http://line.extraott-iptv.com:88/2755789541/1300714776/191686
+#EXTINF:-1 tvg-id="" tvg-logo="https://i.imgur.com/Pbd0tSD.jpg" group-title="⚽ LIVE EVENT", SKY SPORTS FOOTBALL
+http://tv.8dott.xyz:80/live/samuel/samuel123456/35798.ts
+#EXTINF:-1  tvg-logo="https://i.imgur.com/MMCUXth.jpg" group-title="⚽ LIVE EVENT", SKY SPORTS GOLF ᴴᴰ
+http://tv.8dott.xyz:80/live/samuel/samuel123456/164498.ts
+#EXTINF:-1 tvg-logo="https://i.imgur.com/fUmQkL5.jpg" group-title="⚽ LIVE EVENT", TNT Sports 1
+http://line.extraott-iptv.com:88/2755789541/1300714776/13780
+#EXTINF:-1 tvg-logo="https://i.imgur.com/c3syDfk.jpg" group-title="⚽ LIVE EVENT", TNT Sports 2
+http://line.extraott-iptv.com:88/2755789541/1300714776/13779
+#EXTINF:-1 tvg-logo="https://i.imgur.com/qCVx6Xn.jpg" group-title="⚽ LIVE EVENT", TNT Sports 3
+http://line.extraott-iptv.com:88/2755789541/1300714776/13778
+#EXTINF:-1 tvg-logo="https://i.imgur.com/ZFke1fA.jpg" group-title="⚽ LIVE EVENT", TNT Sports 4
+http://line.extraott-iptv.com:88/2755789541/1300714776/153713
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=002046c9a49b9ab1cdb6616bec5d26c3:d2f92f6b7edc9a1a05d393ba0c20ef9e
 #EXTVLCOPT:http-user-agent=Roku/DVP-12.0
@@ -122,6 +157,26 @@ https://d6m3sfa7e58z5.cloudfront.net/out/v1/2e55bc8199044c27b1dbb827af65a04f/ind
 https://d6m3sfa7e58z5.cloudfront.net/out/v1/fe4d00f07e2f43b789102b84b4d243a9/index.mpd
 #EXTINF:-1 tvg-logo="https://raw.githubusercontent.com/whs4030/Logo/refs/heads/main/Peacock-PL.png" group-title="⚽ LIVE EVENT", Peacock Premier League
 https://fsly.stream.peacocktv.com/Content/CMAF_CTR-4s/Live/channel(vc1021n07j)/master.mpd
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:101.0) Gecko/20100101 Firefox/101.0
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=d0f2e5c39e70c18f29bf77768a1ad89a:d6853c51fcf37a18905f0609972395d7
+#EXTINF:-1 tvg-id="TNT 1" tvg-logo="https://i.ibb.co.com/7dNPfNGB/Tntsports1.png" group-title="⚽ LIVE EVENT", TNT SPORTS 1
+https://a201aivottlinear-a.akamaihd.net/OTTB/lhr-nitro/live/dash/enc/bsaaetko8v/out/v1/bd3b0c314fff4bb1ab4693358f3cd2d3/cenc.mpd
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:101.0) Gecko/20100101 Firefox/101.0
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=9f51f3dc6313ac8bc668e2d9d1c04dfa:74bc63e5a193454a91ca494975db33f9
+#EXTINF:-1 tvg-id="TNT 2" tvg-logo="https://i.ibb.co.com/Q3V8tDNL/Tntsports2.png" group-title="⚽ LIVE EVENT", TNT SPORTS 2
+https://a151aivottlinear-a.akamaihd.net/OTTB/lhr-nitro/live/dash/enc/f0qvkrra8j/out/v1/f8fa17f087564f51aa4d5c700be43ec4/cenc.mpd
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:101.0) Gecko/20100101 Firefox/101.0
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=a93c1cbfdccd23233bac13540c693e7f:2f6ab2e6693eb847eff3c9da8f9d01fc
+#EXTINF:-1 tvg-id="TNT 3" tvg-logo="https://i.ibb.co.com/Lzkztmpw/Tntsports3.png" group-title="⚽ LIVE EVENT", TNT SPORTS 3
+https://a201aivottlinear-a.akamaihd.net/OTTB/lhr-nitro/live/dash/enc/lsdasbvglv/out/v1/bb548a3626cd4708afbb94a58d71dce9/cenc.mpd
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:101.0) Gecko/20100101 Firefox/101.0
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=192b1115da041585c77200128549efa1:634e10efe4abbb14be400a3ccbac0258
+#EXTINF:-1 tvg-id="TNT 4" tvg-logo="https://i.ibb.co.com/yJ8TWnb/Tntsports4.png group-title="⚽ LIVE EVENT", TNT SPORTS 4
+https://a151aivottlinear-a.akamaihd.net/OTTB/sin-nitro/live/dash/enc/i2pcjr4pe5/out/v1/912e9db56d75403b8a9ac0a719110f36/cenc.mpd
 #EXTINF:-1 tvg-id="SPOTV.id" tvg-name="SPOTV" tvg-logo="https://mimipipi22.github.io/logo/sports/spotv.jpg" group-title="⚽ LIVE EVENT", #EXTINF:-1 tvg-id="SPOTV.id" tvg-name="SPOTV" tvg-logo="https://mimipipi22.github.io/logo/sports/spotv.jpg" group-title="⚽ LIVE EVENT",,SPOTV
 https://atemecdnbalancer-voe.sysln.id/live/eds/SPOTVHD/mediampd/SPOTVHD.mpd
 #EXTINF:-1 tvg-id="SPOTV.id" tvg-name="SPOTV" tvg-logo="https://mimipipi22.github.io/logo/sports/spotv.jpg" group-title="⚽ LIVE EVENT", #EXTINF:-1 tvg-id="SPOTV.id" tvg-name="SPOTV" tvg-logo="https://mimipipi22.github.io/logo/sports/spotv.jpg" group-title="⚽ LIVE EVENT",,SPOTV
@@ -143,7 +198,7 @@ https://d6m3sfa7e58z5.cloudfront.net/out/v1/fe4d00f07e2f43b789102b84b4d243a9/ind
 #EXTINF:-1 tvg-name="UPCOMING INFO", Melbourne Victory vs Western Sydney Wanderers FC (15:40 WIB) - 30-11-2025
 #EXTINF:-1 tvg-name="UPCOMING INFO", Melbourne Victory vs Western Sydney Wanderers FC (15:40 WIB) - 01-12-2025
 
-#EXTINF:-1 group-title="⭐ SPORTS CHANNEL", 245 Channel Aktif Lainnya
+#EXTINF:-1 group-title="⭐ SPORTS CHANNEL", 227 Channel Aktif Lainnya
 #EXTVLCOPT:http-referrer=https://morgan.h3eaulperhapsfuzkhurried.shop/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Mobile Safari/537.36
 #EXTINF:-1 tvg-name="BRI LIGA 1" tvg-logo="https://i.imgur.com/93ahrpm.gif" group-title="⭐ SPORTS CHANNEL", PEGADAIAN CHAMPIONSHIP⁽ˢᵉʳᵛᵉʳ ²⁾
@@ -250,16 +305,6 @@ https://d2tjypxxy769fn.cloudfront.net/out/v1/46d9cf39b9a84183b8d5022ac8f4bc41/in
 #EXTVLCOPT:http-referrer=https://galandriel1.thobias.cfd/000/
 #EXTINF:-1 group-title="⭐ SPORTS CHANNEL" tvg-logo="https://i.imgur.com/wM26YjF.jpg",PRIMA SPORT 5
 https://galandriel1.thobias.cfd/puk5/usergen0grnd3y8.m3u8
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:101.0) Gecko/20100101 Firefox/101.0
-#KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=d0f2e5c39e70c18f29bf77768a1ad89a:d6853c51fcf37a18905f0609972395d7
-#EXTINF:-1 group-title="⭐ SPORTS CHANNEL" tvg-logo="https://i.imgur.com/v002hpu.jpg",TNT SPORTS 1
-https://a201aivottlinear-a.akamaihd.net/OTTB/lhr-nitro/live/dash/enc/bsaaetko8v/out/v1/bd3b0c314fff4bb1ab4693358f3cd2d3/cenc.mpd
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:101.0) Gecko/20100101 Firefox/101.0
-#KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=9f51f3dc6313ac8bc668e2d9d1c04dfa:74bc63e5a193454a91ca494975db33f9
-#EXTINF:-1 group-title="⭐ SPORTS CHANNEL" tvg-logo="https://i.imgur.com/25GGdCq.jpg",TNT SPORTS 2
-https://a151aivottlinear-a.akamaihd.net/OTTB/lhr-nitro/live/dash/enc/f0qvkrra8j/out/v1/f8fa17f087564f51aa4d5c700be43ec4/cenc.mpd
 #EXTINF:-1 group-title="⭐ SPORTS CHANNEL" tvg-logo="https://i.imgur.com/RElOsbl.jpg", SONY SPORTS 2
 https://raw.githubusercontent.com/DonzCompIndonesia/donztelevision/refs/heads/main/v1/Son2.m3u8
 #KODIPROP:inputstream=inputstream.ffmpegdirect
@@ -289,17 +334,6 @@ https://unifi-live01.secureswiftcontent.com/UnifiHD/live11.mpd
 http://vocotv.pro:80/10/12345/258667
 #EXTINF:-1 group-title="⭐ SPORTS CHANNEL" tvg-logo="https://i.imgur.com/sKmG2IE.jpg",WWW LIVE
 http://Supersonictv.live:8080/live/006779/439866/22185.m3u8
-#EXTINF:-1  tvg-logo="https://i.imgur.com/IKC778N.jpg" group-title="⭐ SPORTS CHANNEL",SKY SPORTS+
-https://a1xs.vip/2000012
-#EXTINF:-1 tvg-logo="https://i.imgur.com/BsoxyN8.jpg" group-title="⭐ SPORTS CHANNEL",SKY SPORTS EPL
-https://a1xs.vip/120004
-#EXTVLCOPT:http-user-agent=Dalvik/2.1.0 (Linux; U; Android 12; sti6140d360 Build/QT) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 TV Safari/537.36
-#EXTINF:-1  tvg-logo="https://i.imgur.com/dLgQjem.jpg" group-title="⭐ SPORTS CHANNEL",SKY SPORTS MOTO GP
-http://tv.8dott.xyz:80/live/samuel/samuel123456/846192.ts
-#EXTINF:-1  tvg-logo="https://i.imgur.com/9jcvlfu.jpg" group-title="⭐ SPORTS CHANNEL",SKY SPORTS F1
-http://line.extraott-iptv.com:88/2755789541/1300714776/153701
-#EXTINF:-1 tvg-logo="https://i.imgur.com/sYp5eoL.jpg" group-title="⭐ SPORTS CHANNEL",SKY SPORTS MAIN
-http://line.stayconnected.pro:80/play/live.php?mac=00:1A:79:39:37:34&stream=1608071&extension=ts&play_token=Yq2ejQhCtj
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36
 #EXTINF:-1 tvg-id="" tvg-name="ASTRO BADMINTON 1" tvg-logo="https://i.imgur.com/qOH3x4Q.jpg" group-title="⭐ SPORTS CHANNEL",ASTRO BADMINTONᴴᴰ
 https://zozotv.xyz:443/live/ZZA21216/zxe36880/155.ts
@@ -334,16 +368,10 @@ http://tv.cloudcdn.me:80/live.ts?channelId=291&uid=15301&deviceMac=00:1A:79:1D:5
 http://tv.cloudcdn.me:80/live.ts?channelId=105349&uid=15301&deviceMac=00:1A:79:1D:53:3F
 #EXTINF:-1 tvg-id="sonyten5hd.in" tvg-name="SONY TEN 5 HD" tvg-logo="https://i.imgur.com/FPe9fhB.jpg" group-title="⭐ SPORTS CHANNEL",SONY TEN 5 ᴴᴰ
 http://tv.cloudcdn.me:80/live.ts?channelId=105350&uid=7245&deviceMac=00:1A:79:B0:A9:0C
-#EXTINF:-1 tvg-id="" tvg-logo="https://i.imgur.com/xp7gQ8o.jpg" group-title="⭐ SPORTS CHANNEL", SKY SPORTS PREMIERE LEAGUE
-http://line.extraott-iptv.com:88/2755789541/1300714776/191686
-#EXTINF:-1 tvg-id="" tvg-logo="https://i.imgur.com/Pbd0tSD.jpg" group-title="⭐ SPORTS CHANNEL", SKY SPORTS FOOTBALL
-http://tv.8dott.xyz:80/live/samuel/samuel123456/35798.ts
 #EXTINF:-1  tvg-logo="https://i.imgur.com/AV2zihB.jpg" group-title="⭐ SPORTS CHANNEL",SKY SPORT ARENA ᴴᴰ
 http://tv.8dott.xyz:80/live/samuel/samuel123456/35796.ts
 #EXTINF:-1  tvg-logo="https://i.imgur.com/wUcMiQU.jpg" group-title="⭐ SPORTS CHANNEL",SKY SPORT F1 ᴴᴰ
 http://line.extraott-iptv.com:88/2755789541/1300714776/153701
-#EXTINF:-1  tvg-logo="https://i.imgur.com/MMCUXth.jpg" group-title="⭐ SPORTS CHANNEL",SKY SPORTS GOLF ᴴᴰ
-http://tv.8dott.xyz:80/live/samuel/samuel123456/164498.ts
 #EXTINF:-1 tvg-logo="https://i.imgur.com/DvBeoWl.jpg" group-title="⭐ SPORTS CHANNEL",DAZN 1-DT1
 http://213.176.3.65:8080/live/COOPERath/w3EBgdaXF0/111261.ts
 #EXTVLCOPT:http-referrer=https://ballsod24hrs.com/
@@ -373,14 +401,6 @@ http://exm3u.extraott.com:80/live/ZUL96376/UG4VTW4E/82238.m3u8
 https://dazn-combat-rakuten.amagi.tv/hls/amagi_hls_data_rakutenAA-dazn-combat-rakuten/CDN/master.m3u8
 #EXTINF:-1 tvg-logo="https://i.imgur.com/IfRv9r2.jpg" group-title="⭐ SPORTS CHANNEL", DAZN F1
 http://medotv.nl:8000/RAMBOfoundedoninternetsoIchangedTheFuckinguSERNAMelol123/5caU9cN5jFjZ/115840
-#EXTINF:-1 tvg-logo="https://i.imgur.com/fUmQkL5.jpg" group-title="⭐ SPORTS CHANNEL",TNT Sports 1
-http://line.extraott-iptv.com:88/2755789541/1300714776/13780
-#EXTINF:-1 tvg-logo="https://i.imgur.com/c3syDfk.jpg" group-title="⭐ SPORTS CHANNEL",TNT Sports 2
-http://line.extraott-iptv.com:88/2755789541/1300714776/13779
-#EXTINF:-1 tvg-logo="https://i.imgur.com/qCVx6Xn.jpg" group-title="⭐ SPORTS CHANNEL",TNT Sports 3
-http://line.extraott-iptv.com:88/2755789541/1300714776/13778
-#EXTINF:-1 tvg-logo="https://i.imgur.com/ZFke1fA.jpg" group-title="⭐ SPORTS CHANNEL",TNT Sports 4
-http://line.extraott-iptv.com:88/2755789541/1300714776/153713
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=60dc08aae52f4c0b806a8e43f24a12c8:30d5b579966d822b215ec51a91d8a271
 #EXTINF:-1 tvg-logo="https://i.imgur.com/jsouajt.jpg" group-title="⭐ SPORTS CHANNEL",ME WATCH SPORTS
@@ -664,26 +684,6 @@ http://op-group1-swiftservehd-1.dens.tv/h/h09/01.m3u8?app_type=web&amp;userid=wn
 https://d25tgymtnqzu8s.cloudfront.net/smil:sukan/manifest.mpd
 #EXTINF:-1 group-title="⭐ SPORTS CHANNEL" tvg-id="" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Okey_RTM.png/200px-Okey_RTM.png",OKEY TV
 https://d25tgymtnqzu8s.cloudfront.net/smil:okey/manifest.mpd
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:101.0) Gecko/20100101 Firefox/101.0
-#KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=d0f2e5c39e70c18f29bf77768a1ad89a:d6853c51fcf37a18905f0609972395d7
-#EXTINF:-1 tvg-id="TNT 1" tvg-logo="https://i.ibb.co.com/7dNPfNGB/Tntsports1.png" group-title="⭐ SPORTS CHANNEL",TNT SPORTS 1
-https://a201aivottlinear-a.akamaihd.net/OTTB/lhr-nitro/live/dash/enc/bsaaetko8v/out/v1/bd3b0c314fff4bb1ab4693358f3cd2d3/cenc.mpd
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:101.0) Gecko/20100101 Firefox/101.0
-#KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=9f51f3dc6313ac8bc668e2d9d1c04dfa:74bc63e5a193454a91ca494975db33f9
-#EXTINF:-1 tvg-id="TNT 2" tvg-logo="https://i.ibb.co.com/Q3V8tDNL/Tntsports2.png" group-title="⭐ SPORTS CHANNEL",TNT SPORTS 2
-https://a151aivottlinear-a.akamaihd.net/OTTB/lhr-nitro/live/dash/enc/f0qvkrra8j/out/v1/f8fa17f087564f51aa4d5c700be43ec4/cenc.mpd
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:101.0) Gecko/20100101 Firefox/101.0
-#KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=a93c1cbfdccd23233bac13540c693e7f:2f6ab2e6693eb847eff3c9da8f9d01fc
-#EXTINF:-1 tvg-id="TNT 3" tvg-logo="https://i.ibb.co.com/Lzkztmpw/Tntsports3.png" group-title="⭐ SPORTS CHANNEL",TNT SPORTS 3
-https://a201aivottlinear-a.akamaihd.net/OTTB/lhr-nitro/live/dash/enc/lsdasbvglv/out/v1/bb548a3626cd4708afbb94a58d71dce9/cenc.mpd
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:101.0) Gecko/20100101 Firefox/101.0
-#KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=192b1115da041585c77200128549efa1:634e10efe4abbb14be400a3ccbac0258
-#EXTINF:-1 tvg-id="TNT 4" tvg-logo="https://i.ibb.co.com/yJ8TWnb/Tntsports4.png group-title="⭐ SPORTS CHANNEL",TNT SPORTS 4
-https://a151aivottlinear-a.akamaihd.net/OTTB/sin-nitro/live/dash/enc/i2pcjr4pe5/out/v1/912e9db56d75403b8a9ac0a719110f36/cenc.mpd
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=eaea45512d137def15b209a089cafd14:8d42db746ed0c4df61729b0d68d42bd7
 #EXTVLCOPT:http-user-agent=Mozilla/5.0
