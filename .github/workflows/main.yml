@@ -5,10 +5,10 @@ on:
   push:
     branches:
       - main
+  # JADWAL BARU: 3 kali per jam (setiap 20 menit)
   schedule:
-    # Jalan setiap hari pada jam 03:00 UTC (sesuaikan waktu sesuai kebutuhan Anda)
-    - cron: '0 3 * * *' 
-  workflow_dispatch:
+    - cron: '*/20 * * * *' # Menjalankan setiap 20 menit
+  workflow_dispatch: # Memungkinkan menjalankan secara manual
 
 jobs:
   generate:
@@ -37,8 +37,8 @@ jobs:
       - name: Commit and Push new M3U and Stats
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          # Pastikan file_pattern ini sesuai dengan output skrip baru
+          # File output yang dihasilkan oleh generate-raw-grouped.js
           file_pattern: 'live-raw-grouped.m3u live-raw-stats.json'
-          commit_message: "Automatic M3U update based on live events (Raw Grouped)"
+          commit_message: "Automatic M3U update based on live events (20m interval)"
           commit_user_name: Live M3U Bot
           commit_user_email: actions@github.com
