@@ -1,0 +1,76 @@
+{
+  /* PENTING: Kata Kunci (Value) di bawah ini digunakan untuk mencocokkan NAMA CHANNEL 
+    Anda dengan Event yang sedang berlangsung (misalnya, di TheSportsDB).
+    
+    Format: "NAMA EVENT/TIM/LIGA": ["Kata Kunci Channel", "Kata Kunci Tim/Nama Khusus"]
+  */
+
+  // =========================================================================
+  // KATA KUNCI PENYIAR UTAMA (Untuk mencocokkan event dengan Channel umum)
+  // =========================================================================
+
+  "bein sports": ["bein 1", "bein 2", "bein 3", "bein sports extra"],
+  "sky sports": ["sky sports premier", "sky sports football", "sky sport arena"],
+  "tnt sports": ["tnt sports 1", "tnt sports 2", "tnt 3", "tnt 4"],
+  "dazn": ["dazn 1", "dazn 2", "dazn laliga", "dazn f1", "dazn combat"],
+  "sportv": ["sportv 1", "sportv 2", "sportv 3"],
+  "espn": ["espn vivo", "espn 2", "espn 3", "espn premium"],
+  "fox sports": ["fox sports 1", "fox 2", "fox 3", "fox premium"],
+  "ssc": ["ssc 1", "ssc 2", "ssc extra"],
+  
+  // =========================================================================
+  // LIGA EROPA UTAMA (Tim-Tim Populer)
+  // =========================================================================
+  
+  // -- Inggris (Premier League) --
+  "premier league": ["arsenal", "chelsea", "liverpool", "manchester city", "manchester united", "tottenham", "newcastle"],
+  "arsenal": ["arsenal"],
+  "chelsea": ["chelsea"],
+  "liverpool": ["liverpool"],
+  "manchester city": ["man city"],
+  "manchester united": ["man utd"],
+  "tottenham": ["spurs"],
+  
+  // -- Spanyol (La Liga) --
+  "la liga": ["real madrid", "barcelona", "atletico madrid", "sevilla", "bilbao"],
+  "real madrid": ["real madrid", "madrid tv"],
+  "barcelona": ["barca", "barcelona"],
+  "atletico madrid": ["atletico"],
+  
+  // -- Italia (Serie A) --
+  "serie a": ["inter", "milan", "juventus", "napoli", "roma", "inter tv", "milan tv"],
+  "inter": ["inter tv"],
+  "milan": ["milan tv"],
+  "juventus": ["juventus"],
+  
+  // -- Jerman (Bundesliga) --
+  "bundesliga": ["bayern munich", "dortmund", "leverkusen", "leipzig"],
+  "bayern munich": ["bayern"],
+  "dortmund": ["dortmund"],
+  
+  // -- Prancis (Ligue 1) --
+  "ligue 1": ["psg", "marseille", "lyon"],
+  "psg": ["psg"],
+
+  // -- Belanda (Eredivisie) --
+  "eredivisie": ["ajax", "psv", "feyenoord"],
+  "ajax": ["ajax"],
+
+  // =========================================================================
+  // TIM NASIONAL (Untuk Event FIFA, Kualifikasi)
+  // =========================================================================
+  
+  "fifa world cup": ["world cup", "kualifikasi"],
+  
+  // -- Negara Populer (Penyiar) --
+  "indonesia": ["indosiar", "tvri sport", "timnas", "tim nasional"],
+  "malaysia": ["liga super malaysia", "malaysia"],
+  "inggris": ["england"],
+  "spanyol": ["spain"],
+  "jerman": ["germany"],
+  "italia": ["italy"],
+  "perancis": ["france"],
+  "belanda": ["netherlands"],
+  "brasil": ["brazil", "sportv"],
+  "argentina": ["argentina", "tyc sports"]
+}
