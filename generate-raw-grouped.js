@@ -4,8 +4,7 @@ import axios from "axios";
 
 /*
   generate-raw-grouped.js 
-  - FINAL KOREKSI: Implementasi Exception List pada headOk() untuk BeIN, SpotV, dan Dazn.
-  - Memastikan channel premium muncul di grup prioritas meskipun HEAD check gagal.
+  - FINAL FIX: Memastikan channel lokal (live.m3u) selalu dianggap online untuk mengatasi kegagalan HEAD check pada channel premium (Bein, SpotV, Dazn).
 */
 
 // Sumber M3U utama dari file lokal repositori Anda
@@ -70,21 +69,15 @@ async function fetchText(url) {
 }
 
 /**
- * MODIFIKASI: Menambahkan daftar pengecualian (Exception List) untuk URL premium.
+ * MODIFIKASI: Menganggap channel lokal (live.m3u) selalu online.
  */
-async function headOk(url) {
-  const lowerUrl = url.toLowerCase();
-
-  // EXCEPTION LIST: Jika URL mengandung keyword ini, kita anggap selalu ONLINE.
-  if (lowerUrl.includes('bein') || 
-      lowerUrl.includes('spotv') || 
-      lowerUrl.includes('dazn') ||
-      !url.startsWith('http')) { 
-      // Menganggap protokol non-HTTP (rtmp, udp) dan channel premium ini selalu berfungsi.
+async function headOk(url, sourceTag) {
+  // 1. Jika berasal dari file lokal Anda, atau protokol non-HTTP, anggap SELALU aktif.
+  if (sourceTag === "LOCAL_FILE" || !url.startsWith('http')) { 
       return true;
   }
   
-  // Lakukan cek HEAD standar untuk semua link HTTP/HTTPS lainnya
+  // 2. Jika URL eksternal, lakukan HEAD check standar.
   try {
     const res = await axios.head(url, { 
         timeout: 7000,
@@ -184,7 +177,7 @@ async function fetchAndGroupEvents() {
         }
     }
     
-    // HACK: Menambahkan keyword umum (untuk matching channel)
+    // HACK: Menambahkan keyword umum untuk meningkatkan Live matching
     groupedEvents.live.keywords.add("bein sports");
     groupedEvents.live.keywords.add("premier league"); 
     groupedEvents.live.keywords.add("spotv");
@@ -214,7 +207,7 @@ function channelMatchesKeywords(channelName, eventKeywords, channelMap) {
 // ========================== MAIN ==========================
 
 async function main() {
-  console.log("Starting generate-raw-grouped.js (Final Fix with Exception List)...");
+  console.log("Starting generate-raw-grouped.js (Final Fix with Bein Exception)...");
 
   const channelMap = loadChannelMap();
 
@@ -237,7 +230,10 @@ async function main() {
   let uniqueCount = new Set(); 
   
   const onlineCheckPromises = allChannelsRaw.map(async (ch) => {
-    const ok = await headOk(ch.url); // Gunakan fungsi headOk yang sudah dimodifikasi
+    // Tentukan tag sumber untuk fungsi headOk
+    const sourceTag = ch.uniqueId.includes("LOCAL_FILE") ? "LOCAL_FILE" : "EXTERNAL";
+
+    const ok = await headOk(ch.url, sourceTag); 
     if (ok) {
         onlineChannelsMap.set(ch.uniqueId, ch); 
         uniqueCount.add(ch.url); 
