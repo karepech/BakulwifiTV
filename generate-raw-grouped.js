@@ -4,8 +4,8 @@ import axios from "axios";
 
 /*
   generate-raw-grouped.js 
-  - FINAL KOREKSI: Memastikan tag waktu [HH:MM WIB] muncul di nama channel di grup LIVE EVENT.
-  - Memisahkan event Live (H0) dan Upcoming (H+1/H+2).
+  - FINAL KOREKSI: Implementasi Exception List pada headOk() untuk BeIN, SpotV, dan Dazn.
+  - Memastikan channel premium muncul di grup prioritas meskipun HEAD check gagal.
 */
 
 // Sumber M3U utama dari file lokal repositori Anda
@@ -31,14 +31,12 @@ function formatDateForM3U(date) {
 function convertUtcToWib(utcTime, dateString) {
     if (!utcTime) return "Waktu Tidak Tersedia";
     
-    // Parse date parts and convert to UTC Date object
     const [year, month, day] = dateString.split('-');
     const dateTimeUtc = new Date(Date.UTC(parseInt(year), parseInt(month) - 1, parseInt(day), parseInt(utcTime.slice(0, 2)), parseInt(utcTime.slice(3, 5))));
 
     // WIB adalah UTC+7
     dateTimeUtc.setHours(dateTimeUtc.getHours() + 7);
 
-    // Format jam: HH:MM WIB
     const hours = String(dateTimeUtc.getHours()).padStart(2, '0');
     const minutes = String(dateTimeUtc.getMinutes()).padStart(2, '0');
     
@@ -71,9 +69,22 @@ async function fetchText(url) {
   }
 }
 
+/**
+ * MODIFIKASI: Menambahkan daftar pengecualian (Exception List) untuk URL premium.
+ */
 async function headOk(url) {
-  if (!url.startsWith('http')) return true; 
+  const lowerUrl = url.toLowerCase();
 
+  // EXCEPTION LIST: Jika URL mengandung keyword ini, kita anggap selalu ONLINE.
+  if (lowerUrl.includes('bein') || 
+      lowerUrl.includes('spotv') || 
+      lowerUrl.includes('dazn') ||
+      !url.startsWith('http')) { 
+      // Menganggap protokol non-HTTP (rtmp, udp) dan channel premium ini selalu berfungsi.
+      return true;
+  }
+  
+  // Lakukan cek HEAD standar untuk semua link HTTP/HTTPS lainnya
   try {
     const res = await axios.head(url, { 
         timeout: 7000,
@@ -136,9 +147,6 @@ function extractChannelsFromM3U(m3u, sourceTag) {
   return channels;
 }
 
-/**
- * Memisahkan keywords dan events menjadi grup LIVE dan UPCOMING.
- */
 async function fetchAndGroupEvents() {
     const dates = getFutureDates();
     const groupedEvents = {
@@ -176,7 +184,7 @@ async function fetchAndGroupEvents() {
         }
     }
     
-    // HACK: Menambahkan keyword umum (tanpa event detail) untuk meningkatkan Live matching
+    // HACK: Menambahkan keyword umum (untuk matching channel)
     groupedEvents.live.keywords.add("bein sports");
     groupedEvents.live.keywords.add("premier league"); 
     groupedEvents.live.keywords.add("spotv");
@@ -206,7 +214,7 @@ function channelMatchesKeywords(channelName, eventKeywords, channelMap) {
 // ========================== MAIN ==========================
 
 async function main() {
-  console.log("Starting generate-raw-grouped.js (Final Time Tag Fix)...");
+  console.log("Starting generate-raw-grouped.js (Final Fix with Exception List)...");
 
   const channelMap = loadChannelMap();
 
@@ -229,7 +237,7 @@ async function main() {
   let uniqueCount = new Set(); 
   
   const onlineCheckPromises = allChannelsRaw.map(async (ch) => {
-    const ok = await headOk(ch.url);
+    const ok = await headOk(ch.url); // Gunakan fungsi headOk yang sudah dimodifikasi
     if (ok) {
         onlineChannelsMap.set(ch.uniqueId, ch); 
         uniqueCount.add(ch.url); 
@@ -267,15 +275,11 @@ async function main() {
           
           // Cari event terdekat yang cocok untuk tag waktu
           const matchingEvent = liveEventsList.find(event => channelMatchesKeywords(ch.name, event.keywords, channelMap));
-          // [HH:MM] WIB
           const timeTag = matchingEvent ? `[${matchingEvent.timeWib.split(' ')[0]}] ` : ''; 
           
           if (ch.vlcOpts.length > 0) output.push(...ch.vlcOpts);
           
-          // Dapatkan nama channel asli (tanpa group title)
           const originalChannelName = ch.extinf.match(/,(.*)$/)[1].trim();
-
-          // Tambahkan tag waktu ke nama channel
           const newExtInf = ch.extinf.replace(/,(.*)$/, `, ${timeTag}${originalChannelName}`);
 
           output.push(newExtInf.replace(/group-title="[^"]*"/g, `group-title="⚽ LIVE EVENT"`));
