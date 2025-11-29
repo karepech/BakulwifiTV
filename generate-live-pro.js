@@ -3,21 +3,16 @@ import fetch from "node-fetch";
 import axios from "axios";
 
 /*
-  generate-live-pro.js 
-  - FIX: Menambahkan timestamp unik pada #EXTM3U agar file selalu di-commit.
-  - FIX: Logika penulisan EXTVLCOPT/KODIPROP yang lebih aman.
-  - Mengambil channel dari sumber (termasuk bakulwifi.my.id/live.m3u) dan mengecek status (Online/Offline).
-  - Menghasilkan M3U dengan pengelompokan cerdas.
+  generate-my-channels-pro.js 
+  - Menggunakan HANYA file 'live.m3u' Anda sendiri sebagai sumber channel.
+  - Menerapkan pengelompokan cerdas: LIVE, UPCOMING, dan SPORTS CHANNEL (default).
 */
 
-const SOURCE_M3US = [
-  "https://getch.semar.my.id/",
-  "https://bakulwifi.my.id/bw.m3u",
-  "https://bakulwifi.my.id/live.m3u"
-];
+// Ganti sumber M3U eksternal dengan file M3U Anda sendiri
+const SOURCE_M3U_FILE = "live.m3u"; 
 const MAX_DAYS_AHEAD = 2;
 
-// ======================= HELPER FUNCTIONS =======================
+// ======================= HELPER FUNCTIONS (Sama seperti sebelumnya) =======================
 
 function formatDateForM3U(date) {
   const d = new Date(date);
@@ -38,6 +33,16 @@ function getFutureDates() {
     });
   }
   return dates;
+}
+
+// Fungsi ini akan membaca file lokal, bukan fetch dari URL
+function readLocalM3U(filePath) {
+    try {
+        return fs.readFileSync(filePath, 'utf8');
+    } catch (e) {
+        console.error(`Error reading local file ${filePath}:`, e.message);
+        return "";
+    }
 }
 
 async function fetchText(url) {
@@ -66,9 +71,6 @@ async function headOk(url) {
   }
 }
 
-/**
- * Mengekstrak EXTVLCOPT dan KODIPROP sebelum URL.
- */
 function extractChannelsFromM3U(m3u) {
   const lines = m3u.split(/\r?\n/);
   const channels = [];
@@ -93,7 +95,6 @@ function extractChannelsFromM3U(m3u) {
           extinf: currentExtInf, 
           name: namePart.trim(), 
           url: trimmedLine,
-          // Simpan semua options/props sebagai array
           vlcOpts: [...currentVlcOpts] 
       });
       
@@ -159,15 +160,17 @@ function channelMatchesKeywords(channelName, keywordsSet) {
 // ========================== MAIN ==========================
 
 async function main() {
-  console.log("Starting generate-live-pro.js (Full Automation Mode)...");
+  console.log("Starting generate-my-channels-pro.js (Your Channels Only)...");
 
-  // --- Langkah 1: Ambil dan Verifikasi Semua Channel ---
-  let allChannels = [];
-  for (const src of SOURCE_M3US) {
-    const m3u = await fetchText(src);
-    if (m3u) allChannels = allChannels.concat(extractChannelsFromM3U(m3u));
+  // --- Langkah 1: Ambil Channel dari file live.m3u lokal ---
+  const localM3uContent = readLocalM3U(SOURCE_M3U_FILE);
+  if (!localM3uContent) {
+      console.error(`FATAL: Could not read ${SOURCE_M3U_FILE}. Please ensure it is uploaded.`);
+      process.exit(1);
   }
-
+  let allChannels = extractChannelsFromM3U(localM3uContent);
+  
+  // Hapus duplikasi jika ada (berdasarkan URL)
   const uniqueChannelsMap = new Map();
   for (const c of allChannels) {
     if (!uniqueChannelsMap.has(c.url)) {
@@ -176,7 +179,7 @@ async function main() {
   }
 
   const unique = Array.from(uniqueChannelsMap.values());
-  console.log("Total unique channels found:", unique.length);
+  console.log(`Total unique channels found in ${SOURCE_M3U_FILE}:`, unique.length);
 
   // --- Langkah 2: Pre-check Status Online ---
   const onlineChannels = [];
@@ -197,7 +200,6 @@ async function main() {
 
   // --- Langkah 4: Kumpulkan Hasil Output ke Grup-grup ---
   const generatedTime = new Date().toISOString();
-  // Tambahkan timestamp di header M3U untuk memastikan selalu ada perubahan konten.
   const output = [`#EXTM3U url-version="${generatedTime}"`]; 
   
   const addedUrls = new Set();
@@ -211,7 +213,6 @@ async function main() {
     const todayEvents = eventsByDate.get(todayDateKey).keywords;
     for (const ch of onlineChannels) {
         if (!addedUrls.has(ch.url) && channelMatchesKeywords(ch.name, todayEvents)) {
-            // Tulis EXTVLCOPT/KODIPROP sebelum EXTINF
             if (ch.vlcOpts.length > 0) output.push(...ch.vlcOpts);
             
             output.push(ch.extinf.replace(/group-title="[^"]*"/g, `group-title="⚽ LIVE EVENT - ${todayDateKey}"`));
@@ -226,18 +227,14 @@ async function main() {
   let upcomingEventCount = 0;
   for (const [dateKey, data] of eventsByDate) {
     if (dateKey !== todayDateKey) {
-        // Tambahkan Header Tanggal Event Mendatang
         output.push(`\n#EXTINF:-1 group-title="📅 UPCOMING EVENTS", ${dateKey}`);
         
-        // Tambahkan list pertandingan sebagai placeholder dalam M3U
         data.events.slice(0, 5).forEach(e => {
             output.push(`#EXTINF:-1 tvg-name="UPCOMING EVENT", ${e}`);
         });
         
-        // Tambahkan channel yang cocok dengan event mendatang
         for (const ch of onlineChannels) {
             if (!addedUrls.has(ch.url) && channelMatchesKeywords(ch.name, data.keywords)) {
-                // Tulis EXTVLCOPT/KODIPROP sebelum EXTINF
                 if (ch.vlcOpts.length > 0) output.push(...ch.vlcOpts);
                 
                 output.push(ch.extinf.replace(/group-title="[^"]*"/g, `group-title="📅 UPCOMING EVENTS"`));
@@ -249,15 +246,14 @@ async function main() {
     }
   }
 
-  // C. Grup ALL ONLINE CHANNELS (Saluran Sport Umum)
+  // C. Grup ALL ONLINE CHANNELS (Saluran Sport Umum - Semua yang tersisa)
   output.push(`\n#EXTINF:-1 group-title="⭐ SPORTS CHANNEL", ${onlineChannels.length - addedUrls.size} Channel Aktif Lainnya`);
   let allOnlineCount = 0;
   for (const ch of onlineChannels) {
     if (!addedUrls.has(ch.url)) {
-        // Tulis EXTVLCOPT/KODIPROP sebelum EXTINF
         if (ch.vlcOpts.length > 0) output.push(...ch.vlcOpts);
         
-        // Mengganti nama grup umum menjadi "⭐ SPORTS CHANNEL"
+        // Ganti group-title lama menjadi "⭐ SPORTS CHANNEL"
         output.push(ch.extinf.replace(/group-title="[^"]*"/g, `group-title="⭐ SPORTS CHANNEL"`));
         output.push(ch.url);
         addedUrls.add(ch.url);
@@ -266,8 +262,8 @@ async function main() {
   }
   
   // --- Langkah 5: Tulis file M3U dan Statistik ---
-  const FILENAME_M3U = "live-event-pro.m3u";
-  const FILENAME_STATS = "live-event-pro-stats.json";
+  const FILENAME_M3U = "live-my-grouped.m3u"; // Nama file output baru
+  const FILENAME_STATS = "live-my-stats.json";
 
   fs.writeFileSync(FILENAME_M3U, output.join("\n") + "\n");
 
