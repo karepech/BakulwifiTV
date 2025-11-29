@@ -4,9 +4,10 @@ import axios from "axios";
 
 /*
   generate-raw-grouped.js 
-  - INTEGRASI BARU: Membaca 'channel-map.json' untuk pencocokan event/liga ke channel penyiar.
-  - Memverifikasi status Online/Offline dan mengelompokkan cerdas.
-  - Memasukkan SEMUA channel yang ditarik, termasuk DUPLIKAT.
+  - SUMBER INPUT: Menggunakan file 'live.m3u' lokal dan sumber eksternal.
+  - FITUR UTAMA: Memasukkan SEMUA channel yang ditarik, termasuk DUPLIKAT.
+  - Fix: Toleran terhadap protokol URL streaming (http, https, rtmp, udp).
+  - Fix: Menggunakan channel-map.json untuk pencocokan event/liga ke channel penyiar.
 */
 
 // Sumber M3U utama dari file lokal repositori Anda
@@ -20,21 +21,6 @@ const SOURCE_M3US = [
 const MAX_DAYS_AHEAD = 2; 
 
 // ======================= HELPER FUNCTIONS =======================
-
-/**
- * FUNGSI BARU: Memuat channel-map.json
- */
-function loadChannelMap() {
-  try {
-    const raw = fs.readFileSync("./channel-map.json", "utf8");
-    // Menggunakan regex untuk menghapus komentar JSON (// ...) agar parsing berhasil
-    const cleanedJson = raw.replace(/\/\*[\s\S]*?\*\/|(?:\/\/).*/g, '');
-    return JSON.parse(cleanedJson);
-  } catch (e) {
-    console.warn("Warning: channel-map.json not found or invalid. Matching will rely only on team/league names. Error:", e.message);
-    return {};
-  }
-}
 
 function formatDateForM3U(date) {
   const d = new Date(date);
@@ -69,6 +55,9 @@ async function fetchText(url) {
 }
 
 async function headOk(url) {
+  // Hanya cek HTTP/HTTPS karena RTMP/UDP sering gagal di cek HEAD/GET
+  if (!url.startsWith('http')) return true; 
+
   try {
     const res = await axios.head(url, { 
         timeout: 7000,
@@ -83,6 +72,20 @@ async function headOk(url) {
   }
 }
 
+function loadChannelMap() {
+  try {
+    const raw = fs.readFileSync("./channel-map.json", "utf8");
+    const cleanedJson = raw.replace(/\/\*[\s\S]*?\*\/|(?:\/\/).*/g, '');
+    return JSON.parse(cleanedJson);
+  } catch (e) {
+    console.warn("Warning: channel-map.json not found or invalid. Matching will rely only on team/league names. Error:", e.message);
+    return {};
+  }
+}
+
+/**
+ * Fix: Mengekstrak EXTVLCOPT dan KODIPROP serta menerima berbagai protokol streaming.
+ */
 function extractChannelsFromM3U(m3u, sourceTag) {
   const lines = m3u.split(/\r?\n/);
   const channels = [];
@@ -102,7 +105,9 @@ function extractChannelsFromM3U(m3u, sourceTag) {
     } else if (trimmedLine.startsWith("#EXTVLCOPT") || trimmedLine.startsWith("#KODIPROP")) {
       currentVlcOpts.push(trimmedLine);
       
-    } else if (trimmedLine.startsWith("http") && currentExtInf) {
+    } else if (currentExtInf && (trimmedLine.startsWith("http") || trimmedLine.startsWith("rtmp") || trimmedLine.startsWith("udp"))) {
+      // FIX: Menerima URL dengan protokol HTTP, HTTPS, RTMP, atau UDP
+      
       const namePart = currentExtInf.split(",")[1] || currentExtInf;
       
       channels.push({ 
@@ -140,31 +145,6 @@ async function fetchUpcomingEvents() {
     return allEvents;
 }
 
-/**
- * FUNGSI MODIFIKASI: Mencocokkan nama channel dengan keywords event ATAU keywords penyiar dari channelMap.
- */
-function channelMatchesKeywords(channelName, eventKeywords, channelMap) {
-  const ln = channelName.toLowerCase();
-
-  // 1. Cek kecocokan langsung dengan Kata Kunci Event (Tim, Nama Liga)
-  for (const k of eventKeywords) {
-    const lowerK = k.toLowerCase();
-    if (ln.includes(lowerK)) return true;
-
-    // 2. Cek kecocokan melalui Channel Map (Channel vs Liga/Penyiar)
-    // Jika kata kunci event adalah nama Liga (misalnya "Premier League") atau nama Tim
-    if (channelMap[lowerK]) {
-      for (const channelKeyword of channelMap[lowerK]) {
-        if (ln.includes(channelKeyword.toLowerCase())) {
-          return true;
-        }
-      }
-    }
-  }
-
-  return false;
-}
-
 function buildEventKeywords(events) {
     const kwMap = new Map();
 
@@ -179,23 +159,41 @@ function buildEventKeywords(events) {
         const entry = kwMap.get(dateKey);
         entry.events.push(eventName);
         
-        // Tambahkan Nama Tim dan Nama Liga/Event sebagai keyword
         if (ev.strHomeTeam) entry.keywords.add(ev.strHomeTeam);
         if (ev.strAwayTeam) entry.keywords.add(ev.strAwayTeam);
         if (ev.strLeague) entry.keywords.add(ev.strLeague);
-        if (ev.strEvent) entry.keywords.add(ev.strEvent); // Contoh: "UEFA Champions League"
+        if (ev.strEvent) entry.keywords.add(ev.strEvent); 
     });
 
     return kwMap;
 }
 
+function channelMatchesKeywords(channelName, eventKeywords, channelMap) {
+  const ln = channelName.toLowerCase();
+
+  // 1. Cek kecocokan langsung dengan Kata Kunci Event (Tim, Nama Liga)
+  for (const k of eventKeywords) {
+    const lowerK = k.toLowerCase();
+    if (ln.includes(lowerK)) return true;
+
+    // 2. Cek kecocokan melalui Channel Map (Channel vs Liga/Penyiar)
+    if (channelMap[lowerK]) {
+      for (const channelKeyword of channelMap[lowerK]) {
+        if (ln.includes(channelKeyword.toLowerCase())) {
+          return true;
+        }
+      }
+    }
+  }
+
+  return false;
+}
 
 // ========================== MAIN ==========================
 
 async function main() {
-  console.log("Starting generate-raw-grouped.js (Including Duplicates)...");
+  console.log("Starting generate-raw-grouped.js (Final Version)...");
 
-  // Load Channel Map di awal
   const channelMap = loadChannelMap();
 
   // --- Langkah 1: Ambil SEMUA Channel (Lokal dan Eksternal) ---
@@ -221,7 +219,7 @@ async function main() {
 
   // --- Langkah 2: Pre-check Status Online ---
   const onlineChannelsMap = new Map();
-  let uniqueCount = new Set();
+  let uniqueCount = new Set(); 
   
   const onlineCheckPromises = allChannelsRaw.map(async (ch) => {
     const ok = await headOk(ch.url);
@@ -255,7 +253,6 @@ async function main() {
   if (eventsByDate.has(todayDateKey)) {
     const todayEvents = eventsByDate.get(todayDateKey).keywords;
     for (const ch of onlineChannels) {
-        // MENGGUNAKAN CHANNEL MAP UNTUK MATCHING
         if (!addedChannelIds.has(ch.uniqueId) && channelMatchesKeywords(ch.name, todayEvents, channelMap)) {
             if (ch.vlcOpts.length > 0) output.push(...ch.vlcOpts);
             
@@ -278,7 +275,6 @@ async function main() {
         });
         
         for (const ch of onlineChannels) {
-            // MENGGUNAKAN CHANNEL MAP UNTUK MATCHING
             if (!addedChannelIds.has(ch.uniqueId) && channelMatchesKeywords(ch.name, data.keywords, channelMap)) {
                 if (ch.vlcOpts.length > 0) output.push(...ch.vlcOpts);
                 
