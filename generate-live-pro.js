@@ -5,7 +5,7 @@ import axios from "axios";
 /*
   generate-live-pro.js 
   - Mengambil channel dan mengecek status (Online/Offline).
-  - MENGINKLUSI EXTVLCOPT untuk meningkatkan keberhasilan streaming.
+  - MENGINKLUSI EXTVLCOPT/KODIPROP untuk meningkatkan keberhasilan streaming.
   - Mengambil jadwal event sepak bola hari ini dan 2 hari mendatang dari TheSportsDB.
   - Menghasilkan M3U dengan pengelompokan event cerdas.
 */
@@ -251,14 +251,15 @@ async function main() {
   }
 
   // C. Grup ALL ONLINE CHANNELS (Semua Channel Online lainnya)
-  output.push(`\n#EXTINF:-1 group-title="⚡ ALL ONLINE CHANNELS", ${onlineChannels.length - addedUrls.size} Channel Aktif Lainnya`);
+  output.push(`\n#EXTINF:-1 group-title="⭐ SPORTS CHANNEL", ${onlineChannels.length - addedUrls.size} Channel Aktif Lainnya`);
   let allOnlineCount = 0;
   for (const ch of onlineChannels) {
     if (!addedUrls.has(ch.url)) {
         // Tulis EXTVLCOPT sebelum EXTINF
         if (ch.vlcOpts) output.push(ch.vlcOpts);
         
-        output.push(ch.extinf.replace(/group-title="[^"]*"/g, `group-title="⚡ ALL ONLINE CHANNELS"`));
+        // Mengganti nama grup umum menjadi "⭐ SPORTS CHANNEL"
+        output.push(ch.extinf.replace(/group-title="[^"]*"/g, `group-title="⭐ SPORTS CHANNEL"`));
         output.push(ch.url);
         addedUrls.add(ch.url);
         allOnlineCount++;
@@ -287,7 +288,7 @@ async function main() {
   console.log("Total Channels Verified Online:", onlineChannels.length);
   console.log("Channels in 'LIVE EVENT' group:", liveEventCount);
   console.log("Channels in 'UPCOMING EVENTS' group:", upcomingEventCount);
-  console.log("Channels in 'ALL ONLINE CHANNELS' group:", allOnlineCount);
+  console.log("Channels in 'SPORTS CHANNEL' group:", allOnlineCount);
   console.log("Generated", FILENAME_M3U);
   console.log("Stats saved to", FILENAME_STATS);
 }
