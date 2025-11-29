@@ -4,10 +4,10 @@ import axios from "axios";
 
 /*
   generate-live-pro.js 
-  - Mengambil channel dan mengecek status (Online/Offline).
-  - MENGINKLUSI EXTVLCOPT/KODIPROP (HEADERS/PROPS) untuk meningkatkan keberhasilan streaming di OTT Navigator.
+  - Mengambil channel dari sumber (termasuk bakulwifi.my.id/live.m3u) dan mengecek status (Online/Offline).
+  - MENGINKLUSI EXTVLCOPT/KODIPROP (HEADERS/PROPS) yang diekstrak dari sumber asli, untuk memperbaiki masalah streaming di OTT Navigator.
   - Mengambil jadwal event sepak bola hari ini dan 2 hari mendatang dari TheSportsDB.
-  - Menghasilkan M3U dengan pengelompokan event cerdas.
+  - Menghasilkan M3U dengan pengelompokan cerdas: LIVE, UPCOMING, dan SPORTS CHANNEL (untuk semua channel online lainnya).
 */
 
 const SOURCE_M3US = [
@@ -67,7 +67,7 @@ async function headOk(url) {
 }
 
 /**
- * Fungsi yang dimodifikasi untuk mengekstrak EXTVLCOPT dan KODIPROP dengan aman.
+ * Mengekstrak EXTVLCOPT dan KODIPROP sebelum URL.
  */
 function extractChannelsFromM3U(m3u) {
   const lines = m3u.split(/\r?\n/);
@@ -80,27 +80,24 @@ function extractChannelsFromM3U(m3u) {
     const trimmedLine = l.trim();
 
     if (trimmedLine.startsWith("#EXTINF")) {
-      // Jika kita menemukan #EXTINF baru
       currentExtInf = trimmedLine;
-      currentVlcOpts = []; // Reset options untuk channel baru
+      currentVlcOpts = []; 
 
     } else if (trimmedLine.startsWith("#EXTVLCOPT") || trimmedLine.startsWith("#KODIPROP")) {
-      // Kumpulkan semua options/props.
       currentVlcOpts.push(trimmedLine);
       
     } else if (trimmedLine.startsWith("http") && currentExtInf) {
-      // Ini adalah URL stream, channel sudah lengkap.
       const namePart = currentExtInf.split(",")[1] || currentExtInf;
       
       channels.push({ 
           extinf: currentExtInf, 
           name: namePart.trim(), 
           url: trimmedLine,
-          // Simpan semua options/props sebagai array untuk penulisan yang lebih aman
+          // Simpan semua options/props sebagai array
           vlcOpts: [...currentVlcOpts] 
       });
       
-      currentExtInf = null; // Reset state
+      currentExtInf = null; 
       currentVlcOpts = [];
     }
   }
@@ -211,7 +208,7 @@ async function main() {
     const todayEvents = eventsByDate.get(todayDateKey).keywords;
     for (const ch of onlineChannels) {
         if (!addedUrls.has(ch.url) && channelMatchesKeywords(ch.name, todayEvents)) {
-            // Tulis EXTVLCOPT sebelum EXTINF
+            // Tulis EXTVLCOPT/KODIPROP sebelum EXTINF
             if (ch.vlcOpts.length > 0) output.push(...ch.vlcOpts);
             
             output.push(ch.extinf.replace(/group-title="[^"]*"/g, `group-title="⚽ LIVE EVENT - ${todayDateKey}"`));
@@ -237,7 +234,7 @@ async function main() {
         // Tambahkan channel yang cocok dengan event mendatang
         for (const ch of onlineChannels) {
             if (!addedUrls.has(ch.url) && channelMatchesKeywords(ch.name, data.keywords)) {
-                // Tulis EXTVLCOPT sebelum EXTINF
+                // Tulis EXTVLCOPT/KODIPROP sebelum EXTINF
                 if (ch.vlcOpts.length > 0) output.push(...ch.vlcOpts);
                 
                 output.push(ch.extinf.replace(/group-title="[^"]*"/g, `group-title="📅 UPCOMING EVENTS"`));
@@ -249,12 +246,12 @@ async function main() {
     }
   }
 
-  // C. Grup ALL ONLINE CHANNELS (Semua Channel Online lainnya)
+  // C. Grup ALL ONLINE CHANNELS (Saluran Sport Umum)
   output.push(`\n#EXTINF:-1 group-title="⭐ SPORTS CHANNEL", ${onlineChannels.length - addedUrls.size} Channel Aktif Lainnya`);
   let allOnlineCount = 0;
   for (const ch of onlineChannels) {
     if (!addedUrls.has(ch.url)) {
-        // Tulis EXTVLCOPT sebelum EXTINF
+        // Tulis EXTVLCOPT/KODIPROP sebelum EXTINF
         if (ch.vlcOpts.length > 0) output.push(...ch.vlcOpts);
         
         // Mengganti nama grup umum menjadi "⭐ SPORTS CHANNEL"
@@ -267,4 +264,32 @@ async function main() {
   
   // --- Langkah 5: Tulis file M3U dan Statistik ---
   const FILENAME_M3U = "live-event-pro.m3u";
-  const FILENAME_STATS = "live-event-
+  const FILENAME_STATS = "live-event-pro-stats.json";
+
+  fs.writeFileSync(FILENAME_M3U, output.join("\n") + "\n");
+
+  const stats = {
+    fetched: allChannels.length,
+    unique: unique.length,
+    onlineTotal: onlineChannels.length,
+    onlineLiveEvent: liveEventCount,
+    onlineUpcoming: upcomingEventCount,
+    onlineGeneral: allOnlineCount,
+    generatedAt: new Date().toISOString()
+  };
+
+  fs.writeFileSync(FILENAME_STATS, JSON.stringify(stats, null, 2));
+
+  console.log("\n=== SUMMARY ===");
+  console.log("Total Channels Verified Online:", onlineChannels.length);
+  console.log("Channels in 'LIVE EVENT' group:", liveEventCount);
+  console.log("Channels in 'UPCOMING EVENTS' group:", upcomingEventCount);
+  console.log("Channels in 'SPORTS CHANNEL' group:", allOnlineCount);
+  console.log("Generated", FILENAME_M3U);
+  console.log("Stats saved to", FILENAME_STATS);
+}
+
+main().catch(err => {
+  console.error("Fatal error:", err);
+  process.exit(1);
+});
