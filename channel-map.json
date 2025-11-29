@@ -1,8 +1,8 @@
 {
   /* PENTING: Kata Kunci (Value) di bawah ini digunakan untuk mencocokkan NAMA CHANNEL 
-    Anda dengan Event yang sedang berlangsung (misalnya, di TheSportsDB).
-    
-    Format: "NAMA EVENT/TIM/LIGA": ["Kata Kunci Channel", "Kata Kunci Tim/Nama Khusus"]
+     Anda dengan Event yang sedang berlangsung (misalnya, di TheSportsDB).
+     
+     Format: "NAMA EVENT/TIM/LIGA": ["Kata Kunci Channel", "Kata Kunci Tim/Nama Khusus"]
   */
 
   // =========================================================================
@@ -28,7 +28,7 @@
   // =========================================================================
   
   // -- Inggris (Premier League) --
-  "premier league": ["arsenal", "chelsea", "liverpool", "manchester city", "manchester united", "tottenham", "newcastle", "peacock"],
+  "premier league": ["arsenal", "chelsea", "liverpool", "manchester city", "manchester united", "tottenham", "newcastle", "peacock", "sky sports", "tnt sports"],
   "arsenal": ["arsenal"],
   "chelsea": ["chelsea"],
   "liverpool": ["liverpool"],
@@ -37,19 +37,19 @@
   "tottenham": ["spurs"],
   
   // -- Spanyol (La Liga) --
-  "la liga": ["real madrid", "barcelona", "atletico madrid", "sevilla", "bilbao"],
+  "la liga": ["real madrid", "barcelona", "atletico madrid", "sevilla", "bilbao", "dazn", "digi sport", "primal sport"],
   "real madrid": ["real madrid", "madrid tv"],
   "barcelona": ["barca", "barcelona", "barca tv"],
   "atletico madrid": ["atletico"],
   
   // -- Italia (Serie A) --
-  "serie a": ["inter", "milan", "juventus", "napoli", "roma", "inter tv", "milan tv"],
+  "serie a": ["inter", "milan", "juventus", "napoli", "roma", "inter tv", "milan tv", "dazn", "sport1"],
   "inter": ["inter tv"],
   "milan": ["milan tv"],
   "juventus": ["juventus"],
   
   // -- Jerman (Bundesliga) --
-  "bundesliga": ["bayern munich", "dortmund", "leverkusen", "leipzig"],
+  "bundesliga": ["bayern munich", "dortmund", "leverkusen", "leipzig", "sky sports", "dazn", "primal sport"],
   "bayern munich": ["bayern"],
   "dortmund": ["dortmund"],
   
@@ -66,7 +66,7 @@
   // =========================================================================
   
   "liga 1 indonesia": ["bri super league", "pegadaian championship"],
-  "liga pro saudi": ["ssc 1", "ssc 2", "ssc extra"],
+  "liga pro saudi": ["ssc 1", "ssc 2", "ssc extra", "fs2"],
   "liga super malaysia": ["liga super malaysia", "astro football"],
   "liga 1 thailand": ["liga 1 thailand"],
 
