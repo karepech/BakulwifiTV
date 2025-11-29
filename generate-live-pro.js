@@ -4,10 +4,10 @@ import axios from "axios";
 
 /*
   generate-live-pro.js 
+  - FIX: Menambahkan timestamp unik pada #EXTM3U agar file selalu di-commit.
+  - FIX: Logika penulisan EXTVLCOPT/KODIPROP yang lebih aman.
   - Mengambil channel dari sumber (termasuk bakulwifi.my.id/live.m3u) dan mengecek status (Online/Offline).
-  - MENGINKLUSI EXTVLCOPT/KODIPROP (HEADERS/PROPS) yang diekstrak dari sumber asli, untuk memperbaiki masalah streaming di OTT Navigator.
-  - Mengambil jadwal event sepak bola hari ini dan 2 hari mendatang dari TheSportsDB.
-  - Menghasilkan M3U dengan pengelompokan cerdas: LIVE, UPCOMING, dan SPORTS CHANNEL (untuk semua channel online lainnya).
+  - Menghasilkan M3U dengan pengelompokan cerdas.
 */
 
 const SOURCE_M3US = [
@@ -196,7 +196,10 @@ async function main() {
   const eventsByDate = buildEventKeywords(events);
 
   // --- Langkah 4: Kumpulkan Hasil Output ke Grup-grup ---
-  const output = ["#EXTM3U"];
+  const generatedTime = new Date().toISOString();
+  // Tambahkan timestamp di header M3U untuk memastikan selalu ada perubahan konten.
+  const output = [`#EXTM3U url-version="${generatedTime}"`]; 
+  
   const addedUrls = new Set();
   
   // A. Grup LIVE EVENT (Events Hari Ini)
