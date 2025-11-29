@@ -4,7 +4,8 @@ import axios from "axios";
 
 /*
   generate-raw-grouped.js 
-  - Logika baru: Semua channel yang cocok dengan Live/Upcoming Events dimasukkan ke dalam SATU grup "⚽ LIVE & UPCOMING EVENTS".
+  - SUMBER INPUT: Menggunakan file 'live.m3u' lokal dan sumber eksternal.
+  - Fix: Termasuk HACK PENGUJIAN STATIS untuk memastikan Channel Matching (BEIN SPORTS) berfungsi, meskipun API TheSportsDB kosong.
   - Memasukkan SEMUA channel yang ditarik, termasuk DUPLIKAT.
 */
 
@@ -18,7 +19,7 @@ const SOURCE_M3US = [
 ];
 const MAX_DAYS_AHEAD = 2; 
 
-// ======================= HELPER FUNCTIONS (Tidak Berubah) =======================
+// ======================= HELPER FUNCTIONS =======================
 
 function formatDateForM3U(date) {
   const d = new Date(date);
@@ -53,6 +54,7 @@ async function fetchText(url) {
 }
 
 async function headOk(url) {
+  // Hanya cek HTTP/HTTPS karena RTMP/UDP sering gagal di cek HEAD/GET
   if (!url.startsWith('http')) return true; 
 
   try {
@@ -137,16 +139,32 @@ async function fetchUpcomingEvents() {
     return allEvents;
 }
 
+/**
+ * MODIFIKASI: Memasukkan keyword uji statis ke dalam set keyword event.
+ */
 function buildEventKeywords(events) {
     const kwMap = new Map();
-    // SATU set besar untuk semua keyword dari semua event (H0, H+1, H+2)
     const allKeywords = new Set(); 
     
+    // =================================================================
+    // DEBUG/TEST HACK: Tambahkan event statis untuk memastikan matching berjalan
+    // Asumsi: Anda memiliki channel BEIN SPORTS, SPOTV, DAZN, dan FOX SPORTS
+    allKeywords.add("bein sports");
+    allKeywords.add("premier league"); 
+    allKeywords.add("spotv");
+    allKeywords.add("dazn");
+    allKeywords.add("fox sports");
+
+    const testEventName = `TEST EVENT: Channel Match Testing - ${formatDateForM3U(new Date())}`;
+    
+    if (!kwMap.has("ALL_EVENTS")) kwMap.set("ALL_EVENTS", { events: [] });
+    kwMap.get("ALL_EVENTS").events.push(testEventName);
+    // =================================================================
+
     events.forEach(ev => {
         const dateKey = formatDateForM3U(ev.m3uDate);
         const eventName = `${ev.strHomeTeam} vs ${ev.strAwayTeam} (${ev.strTime} WIB) - ${dateKey}`;
         
-        // Simpan daftar event untuk header M3U
         if (!kwMap.has("ALL_EVENTS")) kwMap.set("ALL_EVENTS", { events: [] });
         kwMap.get("ALL_EVENTS").events.push(eventName);
         
@@ -184,7 +202,7 @@ function channelMatchesKeywords(channelName, eventKeywords, channelMap) {
 // ========================== MAIN ==========================
 
 async function main() {
-  console.log("Starting generate-raw-grouped.js (Simplified Live Grouping)...");
+  console.log("Starting generate-raw-grouped.js (Final Test Version)...");
 
   const channelMap = loadChannelMap();
 
@@ -236,10 +254,10 @@ async function main() {
   
   const addedChannelIds = new Set();
   
-  // A. Grup LIVE & UPCOMING EVENTS (Prioritas Tertinggi)
+  // A. Grup LIVE & UPCOMING EVENTS (Semua event di satu tempat)
   output.push(`\n#EXTINF:-1 group-title="⚽ LIVE & UPCOMING EVENTS", ${eventList.length} Event Ditemukan`);
   
-  // Tampilkan daftar event (sebagai placeholder)
+  // Tampilkan daftar event (termasuk event uji statis)
   eventList.slice(0, 5).forEach(e => {
       output.push(`#EXTINF:-1 tvg-name="EVENT INFO", ${e}`);
   });
@@ -247,7 +265,7 @@ async function main() {
   let liveUpcomingCount = 0;
 
   for (const ch of onlineChannels) {
-      // Mencocokkan channel dengan SEMUA keyword event (live atau upcoming)
+      // Mencocokkan channel dengan SEMUA keyword event (live, upcoming, dan statis)
       if (!addedChannelIds.has(ch.uniqueId) && channelMatchesKeywords(ch.name, allKeywords, channelMap)) {
           if (ch.vlcOpts.length > 0) output.push(...ch.vlcOpts);
           
