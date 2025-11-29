@@ -4,7 +4,7 @@ import axios from "axios";
 
 /*
   generate-raw-grouped.js 
-  - FINAL FIX: Memastikan channel lokal (live.m3u) selalu dianggap online untuk mengatasi kegagalan HEAD check pada channel premium (Bein, SpotV, Dazn).
+  - FINAL FITUR: Mengganti NAMA CHANNEL di grup LIVE EVENT dengan DETAIL EVENT (Nama Tim, Jam WIB) yang cocok.
 */
 
 // Sumber M3U utama dari file lokal repositori Anda
@@ -68,16 +68,11 @@ async function fetchText(url) {
   }
 }
 
-/**
- * MODIFIKASI: Menganggap channel lokal (live.m3u) selalu online.
- */
 async function headOk(url, sourceTag) {
-  // 1. Jika berasal dari file lokal Anda, atau protokol non-HTTP, anggap SELALU aktif.
   if (sourceTag === "LOCAL_FILE" || !url.startsWith('http')) { 
       return true;
   }
   
-  // 2. Jika URL eksternal, lakukan HEAD check standar.
   try {
     const res = await axios.head(url, { 
         timeout: 7000,
@@ -161,7 +156,7 @@ async function fetchAndGroupEvents() {
                     const eventDetail = `${ev.strHomeTeam} vs ${ev.strAwayTeam} (${wibTime}) - ${d.dateKey}`;
 
                     targetGroup.events.push({
-                        detail: eventDetail,
+                        detail: eventDetail, // Contoh: "Real Madrid vs Barcelona (22:00 WIB) - 30-11-2025"
                         keywords: [ev.strHomeTeam, ev.strAwayTeam, ev.strLeague, ev.strEvent],
                         timeWib: wibTime
                     });
@@ -207,7 +202,7 @@ function channelMatchesKeywords(channelName, eventKeywords, channelMap) {
 // ========================== MAIN ==========================
 
 async function main() {
-  console.log("Starting generate-raw-grouped.js (Final Fix with Bein Exception)...");
+  console.log("Starting generate-raw-grouped.js (Final Channel Name Override)...");
 
   const channelMap = loadChannelMap();
 
@@ -230,7 +225,6 @@ async function main() {
   let uniqueCount = new Set(); 
   
   const onlineCheckPromises = allChannelsRaw.map(async (ch) => {
-    // Tentukan tag sumber untuk fungsi headOk
     const sourceTag = ch.uniqueId.includes("LOCAL_FILE") ? "LOCAL_FILE" : "EXTERNAL";
 
     const ok = await headOk(ch.url, sourceTag); 
@@ -261,7 +255,7 @@ async function main() {
   
   let liveEventCount = 0;
   
-  // Tampilkan daftar event live (Nama Tim, Jam WIB, Tanggal)
+  // Tampilkan daftar event live sebagai header info
   liveEventsList.forEach(e => {
       output.push(`#EXTINF:-1 tvg-name="LIVE INFO", ${e.detail}`);
   });
@@ -269,14 +263,16 @@ async function main() {
   for (const ch of onlineChannels) {
       if (!addedChannelIds.has(ch.uniqueId) && channelMatchesKeywords(ch.name, liveKeywords, channelMap)) {
           
-          // Cari event terdekat yang cocok untuk tag waktu
+          // 1. Cari event terdekat yang cocok
           const matchingEvent = liveEventsList.find(event => channelMatchesKeywords(ch.name, event.keywords, channelMap));
-          const timeTag = matchingEvent ? `[${matchingEvent.timeWib.split(' ')[0]}] ` : ''; 
+          
+          // 2. Tentukan nama baru: eventDetail jika cocok, atau nama channel asli (sebagai fallback)
+          const newChannelName = matchingEvent ? matchingEvent.detail : ch.name;
           
           if (ch.vlcOpts.length > 0) output.push(...ch.vlcOpts);
           
-          const originalChannelName = ch.extinf.match(/,(.*)$/)[1].trim();
-          const newExtInf = ch.extinf.replace(/,(.*)$/, `, ${timeTag}${originalChannelName}`);
+          // Ganti nama channel di EXTINF dengan nama event
+          const newExtInf = ch.extinf.replace(/,(.*)$/, `, ${newChannelName}`);
 
           output.push(newExtInf.replace(/group-title="[^"]*"/g, `group-title="⚽ LIVE EVENT"`));
           output.push(ch.url);
@@ -301,9 +297,16 @@ async function main() {
 
   for (const ch of onlineChannels) {
       if (!addedChannelIds.has(ch.uniqueId) && channelMatchesKeywords(ch.name, upcomingKeywords, channelMap)) {
+          
+          // Ganti nama channel dengan nama event mendatang
+          const matchingEvent = upcomingEventsList.find(event => channelMatchesKeywords(ch.name, event.keywords, channelMap));
+          const newChannelName = matchingEvent ? matchingEvent.detail : ch.name;
+
           if (ch.vlcOpts.length > 0) output.push(...ch.vlcOpts);
           
-          output.push(ch.extinf.replace(/group-title="[^"]*"/g, `group-title="📅 UPCOMING EVENTS"`));
+          const newExtInf = ch.extinf.replace(/,(.*)$/, `, ${newChannelName}`);
+
+          output.push(newExtInf.replace(/group-title="[^"]*"/g, `group-title="📅 UPCOMING EVENTS"`));
           output.push(ch.url);
           addedChannelIds.add(ch.uniqueId);
           upcomingEventCount++;
