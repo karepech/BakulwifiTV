@@ -3,16 +3,23 @@ import fetch from "node-fetch";
 import axios from "axios";
 
 /*
-  generate-my-channels-pro.js 
-  - Menggunakan HANYA file 'live.m3u' Anda sendiri sebagai sumber channel.
-  - Menerapkan pengelompokan cerdas: LIVE, UPCOMING, dan SPORTS CHANNEL (default).
+  generate-raw-grouped.js 
+  - SUMBER INPUT: Menggunakan file 'live.m3u' lokal di repositori sebagai sumber channel utama.
+  - FITUR UTAMA: Memasukkan SEMUA channel yang ditarik, termasuk DUPLIKAT.
+  - Memverifikasi status Online/Offline dan mengelompokkan cerdas.
 */
 
-// Ganti sumber M3U eksternal dengan file M3U Anda sendiri
-const SOURCE_M3U_FILE = "live.m3u"; 
-const MAX_DAYS_AHEAD = 2;
+// Sumber M3U utama dari file lokal repositori Anda
+const LOCAL_M3U_FILE = "live.m3u"; 
 
-// ======================= HELPER FUNCTIONS (Sama seperti sebelumnya) =======================
+// Sumber eksternal tambahan (jika masih diperlukan, atau biarkan kosong: [])
+const SOURCE_M3US = [
+  "https://getch.semar.my.id/",
+  "https://bakulwifi.my.id/bw.m3u"
+];
+const MAX_DAYS_AHEAD = 2; 
+
+// ======================= HELPER FUNCTIONS =======================
 
 function formatDateForM3U(date) {
   const d = new Date(date);
@@ -33,16 +40,6 @@ function getFutureDates() {
     });
   }
   return dates;
-}
-
-// Fungsi ini akan membaca file lokal, bukan fetch dari URL
-function readLocalM3U(filePath) {
-    try {
-        return fs.readFileSync(filePath, 'utf8');
-    } catch (e) {
-        console.error(`Error reading local file ${filePath}:`, e.message);
-        return "";
-    }
 }
 
 async function fetchText(url) {
@@ -71,13 +68,15 @@ async function headOk(url) {
   }
 }
 
-function extractChannelsFromM3U(m3u) {
+function extractChannelsFromM3U(m3u, sourceTag) {
   const lines = m3u.split(/\r?\n/);
   const channels = [];
   
   let currentExtInf = null;
   let currentVlcOpts = [];
   
+  let counter = 0; 
+
   for (const l of lines) {
     const trimmedLine = l.trim();
 
@@ -92,6 +91,8 @@ function extractChannelsFromM3U(m3u) {
       const namePart = currentExtInf.split(",")[1] || currentExtInf;
       
       channels.push({ 
+          // uniqueId untuk setiap baris, termasuk duplikat URL
+          uniqueId: `${sourceTag}-${counter++}`, 
           extinf: currentExtInf, 
           name: namePart.trim(), 
           url: trimmedLine,
@@ -104,7 +105,6 @@ function extractChannelsFromM3U(m3u) {
   }
   return channels;
 }
-
 
 async function fetchUpcomingEvents() {
     const dates = getFutureDates();
@@ -140,7 +140,6 @@ function buildEventKeywords(events) {
     const entry = kwMap.get(dateKey);
     entry.events.push(eventName);
     
-    // Tambahkan kata kunci pencocokan
     if (ev.strHomeTeam) entry.keywords.add(ev.strHomeTeam.toLowerCase());
     if (ev.strAwayTeam) entry.keywords.add(ev.strAwayTeam.toLowerCase());
     if (ev.strLeague) entry.keywords.add(ev.strLeague.toLowerCase());
@@ -160,37 +159,45 @@ function channelMatchesKeywords(channelName, keywordsSet) {
 // ========================== MAIN ==========================
 
 async function main() {
-  console.log("Starting generate-my-channels-pro.js (Your Channels Only)...");
+  console.log("Starting generate-raw-grouped.js (Including Duplicates)...");
 
-  // --- Langkah 1: Ambil Channel dari file live.m3u lokal ---
-  const localM3uContent = readLocalM3U(SOURCE_M3U_FILE);
-  if (!localM3uContent) {
-      console.error(`FATAL: Could not read ${SOURCE_M3U_FILE}. Please ensure it is uploaded.`);
-      process.exit(1);
-  }
-  let allChannels = extractChannelsFromM3U(localM3uContent);
+  // --- Langkah 1: Ambil SEMUA Channel (Lokal dan Eksternal) ---
+  let allChannelsRaw = [];
   
-  // Hapus duplikasi jika ada (berdasarkan URL)
-  const uniqueChannelsMap = new Map();
-  for (const c of allChannels) {
-    if (!uniqueChannelsMap.has(c.url)) {
-      uniqueChannelsMap.set(c.url, c);
-    }
+  // A. Ambil dari file lokal (live.m3u)
+  try {
+      const localM3uContent = fs.readFileSync(LOCAL_M3U_FILE, 'utf8');
+      console.log(`Fetching: ${LOCAL_M3U_FILE} (Lokal)`);
+      allChannelsRaw = allChannelsRaw.concat(extractChannelsFromM3U(localM3uContent, "LOCAL_FILE"));
+  } catch (e) {
+      console.error(`FATAL: Could not read local file ${LOCAL_M3U_FILE}. Ensure it is uploaded.`);
+      // Tidak menghentikan, tetapi mencatat error
   }
 
-  const unique = Array.from(uniqueChannelsMap.values());
-  console.log(`Total unique channels found in ${SOURCE_M3U_FILE}:`, unique.length);
+  // B. Ambil dari sumber eksternal
+  for (const src of SOURCE_M3US) {
+    console.log("Fetching:", src);
+    const m3u = await fetchText(src);
+    if (m3u) allChannelsRaw = allChannelsRaw.concat(extractChannelsFromM3U(m3u, src));
+  }
+  
+  console.log("Total channels fetched (including duplicates):", allChannelsRaw.length);
 
   // --- Langkah 2: Pre-check Status Online ---
-  const onlineChannels = [];
-  const onlineCheckPromises = unique.map(async (ch) => {
+  const onlineChannelsMap = new Map();
+  let uniqueCount = new Set(); // Hanya untuk statistik URL unik
+  
+  const onlineCheckPromises = allChannelsRaw.map(async (ch) => {
     const ok = await headOk(ch.url);
     if (ok) {
-        onlineChannels.push(ch);
-    } 
+        onlineChannelsMap.set(ch.uniqueId, ch); 
+        uniqueCount.add(ch.url); 
+    }
   });
 
   await Promise.all(onlineCheckPromises);
+  const onlineChannels = Array.from(onlineChannelsMap.values());
+
   console.log("Total channels verified as ONLINE:", onlineChannels.length);
 
 
@@ -202,7 +209,7 @@ async function main() {
   const generatedTime = new Date().toISOString();
   const output = [`#EXTM3U url-version="${generatedTime}"`]; 
   
-  const addedUrls = new Set();
+  const addedChannelIds = new Set();
   
   // A. Grup LIVE EVENT (Events Hari Ini)
   const todayDateKey = formatDateForM3U(new Date());
@@ -212,12 +219,12 @@ async function main() {
   if (eventsByDate.has(todayDateKey)) {
     const todayEvents = eventsByDate.get(todayDateKey).keywords;
     for (const ch of onlineChannels) {
-        if (!addedUrls.has(ch.url) && channelMatchesKeywords(ch.name, todayEvents)) {
+        if (!addedChannelIds.has(ch.uniqueId) && channelMatchesKeywords(ch.name, todayEvents)) {
             if (ch.vlcOpts.length > 0) output.push(...ch.vlcOpts);
             
             output.push(ch.extinf.replace(/group-title="[^"]*"/g, `group-title="⚽ LIVE EVENT - ${todayDateKey}"`));
             output.push(ch.url);
-            addedUrls.add(ch.url);
+            addedChannelIds.add(ch.uniqueId);
             liveEventCount++;
         }
     }
@@ -234,43 +241,44 @@ async function main() {
         });
         
         for (const ch of onlineChannels) {
-            if (!addedUrls.has(ch.url) && channelMatchesKeywords(ch.name, data.keywords)) {
+            if (!addedChannelIds.has(ch.uniqueId) && channelMatchesKeywords(ch.name, data.keywords)) {
                 if (ch.vlcOpts.length > 0) output.push(...ch.vlcOpts);
                 
                 output.push(ch.extinf.replace(/group-title="[^"]*"/g, `group-title="📅 UPCOMING EVENTS"`));
                 output.push(ch.url);
-                addedUrls.add(ch.url);
+                addedChannelIds.add(ch.uniqueId);
                 upcomingEventCount++;
             }
         }
     }
   }
 
-  // C. Grup ALL ONLINE CHANNELS (Saluran Sport Umum - Semua yang tersisa)
-  output.push(`\n#EXTINF:-1 group-title="⭐ SPORTS CHANNEL", ${onlineChannels.length - addedUrls.size} Channel Aktif Lainnya`);
+  // C. Grup SPORTS CHANNEL (Semua Saluran Online Lainnya, Termasuk Duplikat)
+  const remainingCount = onlineChannels.length - addedChannelIds.size;
+  output.push(`\n#EXTINF:-1 group-title="⭐ SPORTS CHANNEL", ${remainingCount} Channel Aktif Lainnya`);
   let allOnlineCount = 0;
   for (const ch of onlineChannels) {
-    if (!addedUrls.has(ch.url)) {
+    if (!addedChannelIds.has(ch.uniqueId)) {
         if (ch.vlcOpts.length > 0) output.push(...ch.vlcOpts);
         
-        // Ganti group-title lama menjadi "⭐ SPORTS CHANNEL"
+        // Memasukkan channel, termasuk duplikat yang tersisa
         output.push(ch.extinf.replace(/group-title="[^"]*"/g, `group-title="⭐ SPORTS CHANNEL"`));
         output.push(ch.url);
-        addedUrls.add(ch.url);
+        addedChannelIds.add(ch.uniqueId);
         allOnlineCount++;
     }
   }
   
   // --- Langkah 5: Tulis file M3U dan Statistik ---
-  const FILENAME_M3U = "live-my-grouped.m3u"; // Nama file output baru
-  const FILENAME_STATS = "live-my-stats.json";
+  const FILENAME_M3U = "live-raw-grouped.m3u"; 
+  const FILENAME_STATS = "live-raw-stats.json";
 
   fs.writeFileSync(FILENAME_M3U, output.join("\n") + "\n");
 
   const stats = {
-    fetched: allChannels.length,
-    unique: unique.length,
-    onlineTotal: onlineChannels.length,
+    fetchedTotalRaw: allChannelsRaw.length,
+    uniqueUrlsOnline: uniqueCount.size,
+    onlineTotalRaw: onlineChannels.length,
     onlineLiveEvent: liveEventCount,
     onlineUpcoming: upcomingEventCount,
     onlineGeneral: allOnlineCount,
@@ -280,10 +288,11 @@ async function main() {
   fs.writeFileSync(FILENAME_STATS, JSON.stringify(stats, null, 2));
 
   console.log("\n=== SUMMARY ===");
-  console.log("Total Channels Verified Online:", onlineChannels.length);
+  console.log("Total Raw Channels Processed:", allChannelsRaw.length);
+  console.log("Total Online Channels Added (Including Duplicates):", onlineChannels.length);
   console.log("Channels in 'LIVE EVENT' group:", liveEventCount);
   console.log("Channels in 'UPCOMING EVENTS' group:", upcomingEventCount);
-  console.log("Channels in 'SPORTS CHANNEL' group:", allOnlineCount);
+  console.log("Channels in 'SPORTS CHANNEL' group (catch-all):", allOnlineCount);
   console.log("Generated", FILENAME_M3U);
   console.log("Stats saved to", FILENAME_STATS);
 }
