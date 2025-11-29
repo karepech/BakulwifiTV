@@ -4,9 +4,8 @@ import axios from "axios";
 
 /*
   generate-raw-grouped.js 
-  - SUMBER INPUT: Menggunakan file 'live.m3u' lokal dan sumber eksternal.
-  - Fix: Termasuk HACK PENGUJIAN STATIS untuk memastikan Channel Matching (BEIN SPORTS) berfungsi, meskipun API TheSportsDB kosong.
-  - Memasukkan SEMUA channel yang ditarik, termasuk DUPLIKAT.
+  - FINAL FIX: Memisahkan Live Event (H0) dan Upcoming Event (H+1/H+2) secara ketat.
+  - Menulis detail Event (Nama Tim, Jam WIB, Tanggal) sebagai header M3U yang dapat dibaca player.
 */
 
 // Sumber M3U utama dari file lokal repositori Anda
@@ -29,6 +28,22 @@ function formatDateForM3U(date) {
   return `${dd}-${mm}-${yyyy}`;
 }
 
+function convertUtcToWib(utcTime, dateString) {
+    if (!utcTime) return "Waktu Tidak Tersedia";
+    
+    const [year, month, day] = dateString.split('-');
+    // Membuat objek Date berdasarkan UTC
+    const dateTimeUtc = new Date(Date.UTC(year, month - 1, day, parseInt(utcTime.slice(0, 2)), parseInt(utcTime.slice(3, 5))));
+
+    // WIB adalah UTC+7
+    dateTimeUtc.setHours(dateTimeUtc.getHours() + 7);
+
+    const hours = String(dateTimeUtc.getHours()).padStart(2, '0');
+    const minutes = String(dateTimeUtc.getMinutes()).padStart(2, '0');
+    
+    return `${hours}:${minutes} WIB`;
+}
+
 function getFutureDates() {
   const dates = [];
   for (let i = 0; i <= MAX_DAYS_AHEAD; i++) {
@@ -36,7 +51,9 @@ function getFutureDates() {
     d.setDate(d.getDate() + i);
     dates.push({
       apiDate: `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`,
-      m3uDate: d
+      m3uDate: d,
+      isToday: i === 0,
+      dateKey: formatDateForM3U(d)
     });
   }
   return dates;
@@ -54,7 +71,6 @@ async function fetchText(url) {
 }
 
 async function headOk(url) {
-  // Hanya cek HTTP/HTTPS karena RTMP/UDP sering gagal di cek HEAD/GET
   if (!url.startsWith('http')) return true; 
 
   try {
@@ -119,74 +135,64 @@ function extractChannelsFromM3U(m3u, sourceTag) {
   return channels;
 }
 
-async function fetchUpcomingEvents() {
+/**
+ * MODIFIKASI: Memisahkan keywords dan events menjadi grup LIVE dan UPCOMING.
+ */
+async function fetchAndGroupEvents() {
     const dates = getFutureDates();
-    let allEvents = [];
-
+    const groupedEvents = {
+        live: { keywords: new Set(), events: [] },
+        upcoming: { keywords: new Set(), events: [] }
+    };
+    
     for (const d of dates) {
         const url = `https://www.thesportsdb.com/api/v1/json/3/eventsday.php?d=${d.apiDate}&s=Soccer`;
         const txt = await fetchText(url);
+        
         if (txt) {
             try {
                 const events = JSON.parse(txt).events || [];
-                events.forEach(ev => ev.m3uDate = d.m3uDate);
-                allEvents = allEvents.concat(events);
+                const targetGroup = d.isToday ? groupedEvents.live : groupedEvents.upcoming;
+                
+                events.forEach(ev => {
+                    const wibTime = convertUtcToWib(ev.strTime, ev.dateEvent);
+                    // Detail event untuk M3U header
+                    const eventDetail = `${ev.strHomeTeam} vs ${ev.strAwayTeam} (${wibTime}) - ${d.dateKey}`;
+
+                    targetGroup.events.push({
+                        detail: eventDetail,
+                        keywords: [ev.strHomeTeam, ev.strAwayTeam, ev.strLeague, ev.strEvent]
+                    });
+                    
+                    // Kumpulkan semua keywords ke set besar
+                    if (ev.strHomeTeam) targetGroup.keywords.add(ev.strHomeTeam);
+                    if (ev.strAwayTeam) targetGroup.keywords.add(ev.strAwayTeam);
+                    if (ev.strLeague) targetGroup.keywords.add(ev.strLeague);
+                    if (ev.strEvent) targetGroup.keywords.add(ev.strEvent); 
+                });
             } catch (e) {
-                console.error("Error parsing events for", d.apiDate, e.message);
+                console.error("Error parsing events:", e.message);
             }
         }
     }
-    return allEvents;
+    
+    // DEBUG/TEST HACK: Tambahkan event statis ke grup LIVE
+    groupedEvents.live.keywords.add("bein sports");
+    groupedEvents.live.keywords.add("premier league"); 
+    groupedEvents.live.keywords.add("spotv");
+    groupedEvents.live.events.push({ detail: `TEST EVENT: Channel Match Testing (LIVE) - ${formatDateForM3U(new Date())}` });
+
+    return groupedEvents;
 }
 
-/**
- * MODIFIKASI: Memasukkan keyword uji statis ke dalam set keyword event.
- */
-function buildEventKeywords(events) {
-    const kwMap = new Map();
-    const allKeywords = new Set(); 
-    
-    // =================================================================
-    // DEBUG/TEST HACK: Tambahkan event statis untuk memastikan matching berjalan
-    // Asumsi: Anda memiliki channel BEIN SPORTS, SPOTV, DAZN, dan FOX SPORTS
-    allKeywords.add("bein sports");
-    allKeywords.add("premier league"); 
-    allKeywords.add("spotv");
-    allKeywords.add("dazn");
-    allKeywords.add("fox sports");
-
-    const testEventName = `TEST EVENT: Channel Match Testing - ${formatDateForM3U(new Date())}`;
-    
-    if (!kwMap.has("ALL_EVENTS")) kwMap.set("ALL_EVENTS", { events: [] });
-    kwMap.get("ALL_EVENTS").events.push(testEventName);
-    // =================================================================
-
-    events.forEach(ev => {
-        const dateKey = formatDateForM3U(ev.m3uDate);
-        const eventName = `${ev.strHomeTeam} vs ${ev.strAwayTeam} (${ev.strTime} WIB) - ${dateKey}`;
-        
-        if (!kwMap.has("ALL_EVENTS")) kwMap.set("ALL_EVENTS", { events: [] });
-        kwMap.get("ALL_EVENTS").events.push(eventName);
-        
-        // Kumpulkan semua keywords ke dalam satu set besar
-        if (ev.strHomeTeam) allKeywords.add(ev.strHomeTeam);
-        if (ev.strAwayTeam) allKeywords.add(ev.strAwayTeam);
-        if (ev.strLeague) allKeywords.add(ev.strLeague);
-        if (ev.strEvent) allKeywords.add(ev.strEvent); 
-    });
-
-    return { events: events, eventList: kwMap.get("ALL_EVENTS") ? kwMap.get("ALL_EVENTS").events : [], allKeywords: allKeywords };
-}
 
 function channelMatchesKeywords(channelName, eventKeywords, channelMap) {
   const ln = channelName.toLowerCase();
 
-  // 1. Cek kecocokan langsung dengan Kata Kunci Event (Tim, Nama Liga)
   for (const k of eventKeywords) {
     const lowerK = k.toLowerCase();
     if (ln.includes(lowerK)) return true;
 
-    // 2. Cek kecocokan melalui Channel Map (Channel vs Liga/Penyiar)
     if (channelMap[lowerK]) {
       for (const channelKeyword of channelMap[lowerK]) {
         if (ln.includes(channelKeyword.toLowerCase())) {
@@ -195,39 +201,31 @@ function channelMatchesKeywords(channelName, eventKeywords, channelMap) {
       }
     }
   }
-
   return false;
 }
 
 // ========================== MAIN ==========================
 
 async function main() {
-  console.log("Starting generate-raw-grouped.js (Final Test Version)...");
+  console.log("Starting generate-raw-grouped.js (Final Separated Groups)...");
 
   const channelMap = loadChannelMap();
 
-  // --- Langkah 1: Ambil SEMUA Channel (Lokal dan Eksternal) ---
+  // --- Langkah 1: Ambil SEMUA Channel ---
   let allChannelsRaw = [];
   
-  // A. Ambil dari file lokal (live.m3u)
   try {
       const localM3uContent = fs.readFileSync(LOCAL_M3U_FILE, 'utf8');
-      console.log(`Fetching: ${LOCAL_M3U_FILE} (Lokal)`);
       allChannelsRaw = allChannelsRaw.concat(extractChannelsFromM3U(localM3uContent, "LOCAL_FILE"));
   } catch (e) {
       console.error(`FATAL: Could not read local file ${LOCAL_M3U_FILE}. Ensure it is uploaded.`);
   }
 
-  // B. Ambil dari sumber eksternal
   for (const src of SOURCE_M3US) {
-    console.log("Fetching:", src);
     const m3u = await fetchText(src);
     if (m3u) allChannelsRaw = allChannelsRaw.concat(extractChannelsFromM3U(m3u, src));
   }
   
-  console.log("Total channels fetched (including duplicates):", allChannelsRaw.length);
-
-  // --- Langkah 2: Pre-check Status Online ---
   const onlineChannelsMap = new Map();
   let uniqueCount = new Set(); 
   
@@ -241,42 +239,68 @@ async function main() {
 
   await Promise.all(onlineCheckPromises);
   const onlineChannels = Array.from(onlineChannelsMap.values());
-
   console.log("Total channels verified as ONLINE:", onlineChannels.length);
 
-
-  // --- Langkah 3: Ambil Jadwal Event & Kumpulkan Semua Keywords ---
-  const { eventList, allKeywords } = buildEventKeywords(await fetchUpcomingEvents());
-
+  // --- Langkah 3: Ambil Jadwal Event & Kelompokkan ---
+  const groupedEvents = await fetchAndGroupEvents();
+  
   // --- Langkah 4: Kumpulkan Hasil Output ke Grup-grup ---
   const generatedTime = new Date().toISOString();
   const output = [`#EXTM3U url-version="${generatedTime}"`]; 
   
   const addedChannelIds = new Set();
   
-  // A. Grup LIVE & UPCOMING EVENTS (Semua event di satu tempat)
-  output.push(`\n#EXTINF:-1 group-title="⚽ LIVE & UPCOMING EVENTS", ${eventList.length} Event Ditemukan`);
+  // A. Grup LIVE EVENT (Hari Ini - H0)
+  const liveKeywords = groupedEvents.live.keywords;
+  const liveEventsList = groupedEvents.live.events;
   
-  // Tampilkan daftar event (termasuk event uji statis)
-  eventList.slice(0, 5).forEach(e => {
-      output.push(`#EXTINF:-1 tvg-name="EVENT INFO", ${e}`);
+  output.push(`\n#EXTINF:-1 group-title="⚽ LIVE EVENT", HARI INI - ${liveEventsList.length} Event`);
+  
+  let liveEventCount = 0;
+  
+  // Tampilkan daftar event live (Nama Tim, Jam WIB, Tanggal)
+  liveEventsList.forEach(e => {
+      output.push(`#EXTINF:-1 tvg-name="LIVE INFO", ${e.detail}`);
   });
-  
-  let liveUpcomingCount = 0;
 
   for (const ch of onlineChannels) {
-      // Mencocokkan channel dengan SEMUA keyword event (live, upcoming, dan statis)
-      if (!addedChannelIds.has(ch.uniqueId) && channelMatchesKeywords(ch.name, allKeywords, channelMap)) {
+      if (!addedChannelIds.has(ch.uniqueId) && channelMatchesKeywords(ch.name, liveKeywords, channelMap)) {
           if (ch.vlcOpts.length > 0) output.push(...ch.vlcOpts);
           
-          output.push(ch.extinf.replace(/group-title="[^"]*"/g, `group-title="⚽ LIVE & UPCOMING EVENTS"`));
+          output.push(ch.extinf.replace(/group-title="[^"]*"/g, `group-title="⚽ LIVE EVENT"`));
           output.push(ch.url);
           addedChannelIds.add(ch.uniqueId);
-          liveUpcomingCount++;
+          liveEventCount++;
       }
   }
 
-  // B. Grup SPORTS CHANNEL (Semua Saluran Online Lainnya, Termasuk Duplikat)
+
+  // B. Grup UPCOMING EVENTS (H+1 dan H+2)
+  const upcomingKeywords = groupedEvents.upcoming.keywords;
+  const upcomingEventsList = groupedEvents.upcoming.events;
+  
+  output.push(`\n#EXTINF:-1 group-title="📅 UPCOMING EVENTS", MENDATANG - ${upcomingEventsList.length} Event`);
+  
+  let upcomingEventCount = 0;
+  
+  // Tampilkan daftar event mendatang (Nama Tim, Jam WIB, Tanggal)
+  upcomingEventsList.forEach(e => {
+      output.push(`#EXTINF:-1 tvg-name="UPCOMING INFO", ${e.detail}`);
+  });
+
+  for (const ch of onlineChannels) {
+      // Pastikan channel ini belum ditambahkan ke grup LIVE (A)
+      if (!addedChannelIds.has(ch.uniqueId) && channelMatchesKeywords(ch.name, upcomingKeywords, channelMap)) {
+          if (ch.vlcOpts.length > 0) output.push(...ch.vlcOpts);
+          
+          output.push(ch.extinf.replace(/group-title="[^"]*"/g, `group-title="📅 UPCOMING EVENTS"`));
+          output.push(ch.url);
+          addedChannelIds.add(ch.uniqueId);
+          upcomingEventCount++;
+      }
+  }
+  
+  // C. Grup SPORTS CHANNEL (Semua Saluran Online Lainnya)
   const remainingCount = onlineChannels.length - addedChannelIds.size;
   output.push(`\n#EXTINF:-1 group-title="⭐ SPORTS CHANNEL", ${remainingCount} Channel Aktif Lainnya`);
   let allOnlineCount = 0;
@@ -301,7 +325,8 @@ async function main() {
     fetchedTotalRaw: allChannelsRaw.length,
     uniqueUrlsOnline: uniqueCount.size,
     onlineTotalRaw: onlineChannels.length,
-    onlineLiveUpcoming: liveUpcomingCount,
+    onlineLive: liveEventCount,
+    onlineUpcoming: upcomingEventCount,
     onlineGeneral: allOnlineCount,
     generatedAt: new Date().toISOString()
   };
@@ -309,9 +334,9 @@ async function main() {
   fs.writeFileSync(FILENAME_STATS, JSON.stringify(stats, null, 2));
 
   console.log("\n=== SUMMARY ===");
-  console.log("Total Raw Channels Processed:", allChannelsRaw.length);
   console.log("Total Online Channels Added (Including Duplicates):", onlineChannels.length);
-  console.log("Channels in 'LIVE & UPCOMING EVENTS' group:", liveUpcomingCount);
+  console.log("Channels in 'LIVE EVENT' group:", liveEventCount);
+  console.log("Channels in 'UPCOMING EVENTS' group:", upcomingEventCount);
   console.log("Channels in 'SPORTS CHANNEL' group (catch-all):", allOnlineCount);
   console.log("Generated", FILENAME_M3U);
   console.log("Stats saved to", FILENAME_STATS);
