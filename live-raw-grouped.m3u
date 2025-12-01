@@ -1,7 +1,7 @@
-#EXTM3U url-version="2025-11-30T23:44:38.539Z"
+#EXTM3U url-version="2025-12-01T01:14:39.553Z"
 
 #EXTINF:-1 group-title="⚽ LIVE EVENT", HARI INI - 1 Event
-#EXTINF:-1 tvg-name="LIVE INFO", Melbourne Victory vs Western Sydney Wanderers FC (15:40 WIB) - 30-11-2025
+#EXTINF:-1 tvg-name="LIVE INFO", Melbourne Victory vs Western Sydney Wanderers FC (15:40 WIB) - 01-12-2025
 #KODIPROP:inputstreamaddon=inputstream.adaptive
 #KODIPROP:inputstream.adaptive.manifest_type=dash
 #KODIPROP:inputstream.adaptive.license_type=clearkey
@@ -195,8 +195,8 @@ https://d6m3sfa7e58z5.cloudfront.net/out/v1/2e55bc8199044c27b1dbb827af65a04f/ind
 https://d6m3sfa7e58z5.cloudfront.net/out/v1/fe4d00f07e2f43b789102b84b4d243a9/index.mpd
 
 #EXTINF:-1 group-title="📅 UPCOMING EVENTS", MENDATANG - 2 Event
-#EXTINF:-1 tvg-name="UPCOMING INFO", Melbourne Victory vs Western Sydney Wanderers FC (15:40 WIB) - 01-12-2025
 #EXTINF:-1 tvg-name="UPCOMING INFO", Melbourne Victory vs Western Sydney Wanderers FC (15:40 WIB) - 02-12-2025
+#EXTINF:-1 tvg-name="UPCOMING INFO", Melbourne Victory vs Western Sydney Wanderers FC (15:40 WIB) - 03-12-2025
 
 #EXTINF:-1 group-title="⭐ SPORTS CHANNEL", 227 Channel Aktif Lainnya
 #EXTVLCOPT:http-referrer=https://morgan.h3eaulperhapsfuzkhurried.shop/
