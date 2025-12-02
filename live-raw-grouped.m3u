@@ -1,7 +1,13 @@
-#EXTM3U url-version="2025-12-02T20:41:35.692Z"
+#EXTM3U url-version="2025-12-02T20:43:53.281Z"
 
-#EXTINF:-1 group-title="SPORT CHANNELS", === DAFTAR CHANNEL (268) ===
+#EXTINF:-1 group-title="SPORT CHANNELS", === DAFTAR CHANNEL (271) ===
 http://localhost/info
+#EXTINF:-1 tvg-id="" tvg-name="" tvg-logo="https://mimipipi22.github.io/logo/sports/champions1.jpg" group-title="SPORT CHANNELS",,CHAMPIONS TV 1
+http://202.169.224.202:8800/udp/239.9.1.9:1234
+#EXTINF:-1 tvg-id="" tvg-name="" tvg-logo="https://mimipipi22.github.io/logo/sports/champions2.jpg" group-title="SPORT CHANNELS",,CHAMPIONS TV 2
+http://202.169.224.202:8800/udp/239.9.1.10:1234
+#EXTINF:-1 tvg-id="" tvg-name="" tvg-logo="https://mimipipi22.github.io/logo/sports/champions3.jpg" group-title="SPORT CHANNELS",,CHAMPIONS TV 3
+http://202.169.224.202:8800/udp/239.9.1.11:1234
 #EXTVLCOPT:http-referrer=https://morgan.h3eaulperhapsfuzkhurried.shop/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Mobile Safari/537.36
 #EXTINF:-1 tvg-name="BRI LIGA 1" tvg-logo="https://i.imgur.com/93ahrpm.gif" group-title="SPORT CHANNELS", PEGADAIAN CHAMPIONSHIP⁽ˢᵉʳᵛᵉʳ ²⁾
