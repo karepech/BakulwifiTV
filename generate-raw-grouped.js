@@ -12,6 +12,7 @@ const LOCAL_M3U_FILE = "live.m3u";
 
 // Sumber eksternal tambahan (jika masih diperlukan)
 const SOURCE_M3US = [
+  "https://memek.vip-neostream.workers.dev/validate?token=Seblax5K",
   "https://getch.semar.my.id/",
   "https://bakulwifi.my.id/bw.m3u"
 ];
