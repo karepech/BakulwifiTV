@@ -1,6 +1,6 @@
-#EXTM3U url-version="2025-12-02T20:40:11.169Z"
+#EXTM3U url-version="2025-12-02T20:41:35.692Z"
 
-#EXTINF:-1 group-title="SPORT CHANNELS", === DAFTAR CHANNEL (271) ===
+#EXTINF:-1 group-title="SPORT CHANNELS", === DAFTAR CHANNEL (268) ===
 http://localhost/info
 #EXTVLCOPT:http-referrer=https://morgan.h3eaulperhapsfuzkhurried.shop/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Mobile Safari/537.36
@@ -855,12 +855,6 @@ https://dck-ac-live.cdn.indazn.com/dash/dazn-linear-504/stream.mpd
 #KODIPROP:inputstream.adaptive.license_key=8ab47741930c476780515f9a00decb0a:7ab4b9ae5a48aa526e511a913b832769
 #EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/d/d6/Dazn-logo.png" , DAZN
 https://dck-ac-live.cdn.indazn.com/dash/dazn-linear-526/stream.mpd
-#EXTINF:-1 tvg-id="" tvg-name="" tvg-logo="https://mimipipi22.github.io/logo/sports/champions1.jpg" group-title="SPORT CHANNELS",,CHAMPIONS TV 1
-http://202.169.224.202:8800/udp/239.9.1.9:1234
-#EXTINF:-1 tvg-id="" tvg-name="" tvg-logo="https://mimipipi22.github.io/logo/sports/champions2.jpg" group-title="SPORT CHANNELS",,CHAMPIONS TV 2
-http://202.169.224.202:8800/udp/239.9.1.10:1234
-#EXTINF:-1 tvg-id="" tvg-name="" tvg-logo="https://mimipipi22.github.io/logo/sports/champions3.jpg" group-title="SPORT CHANNELS",,CHAMPIONS TV 3
-http://202.169.224.202:8800/udp/239.9.1.11:1234
 #EXTINF:-1 tvg-id="FightSports.id" tvg-name="Fight Sports" tvg-logo="https://mimipipi22.github.io/logo/sports/fightsports.jpg" group-title="SPORT CHANNELS",,FIGHT SPORTS
 https://d2tjypxxy769fn.cloudfront.net/out/v1/73b7057c72da4615888a11b02a6cbb3c/index.mpd
 #EXTINF:-1 tvg-id="Eurosport" tvg-name="Eurosport" tvg-logo="https://mimipipi22.github.io/logo/sports/eurosports.jpg" group-title="SPORT CHANNELS",,EUROSPORT
