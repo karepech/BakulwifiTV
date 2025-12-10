@@ -27,85 +27,6 @@ https://ls-mp04.eo-edgefunctions7.com/out/v1/4604623e7ff4462a962275664ccd8ee5/ma
 https://ls-mp03.eo-edgefunctions7.com/out/v1/926637c1aba44cffa74adc74bf786816/manifest.mpd
 
 🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹 [LINE] 🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹
-
-
-
-
-
-🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹 [LINE] 🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹
-
-#KODIPROP:inputstream.adaptive.stream_selection_type=adaptive
-#KODIPROP:inputstream=ffmpegdirect
-#KODIPROP:inputstream.ffmpeg_options=-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5
-#KODIPROP:inputstream.adaptive.stream_headers=user-agent=Mozilla/5.0 (Linux; Android 12; Kodi/21.0) ExoPlayerLib/2.9.6,referer=http://203.77.246.58/
-#KODIPROP:network-caching=2000
-#EXTINF:-1 tvg-id="" tvg-name="" tvg-logo="https://mimipipi22.github.io/logo/sports/champions1.jpg" group-title="⭐|SPORTS CHANNEL",,CHAMPIONS TV 1
-http://202.169.224.202:8800/udp/239.9.1.9:1234
-
-#KODIPROP:inputstream.adaptive.stream_selection_type=adaptive
-#KODIPROP:inputstream=ffmpegdirect
-#KODIPROP:inputstream.ffmpeg_options=-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5
-#KODIPROP:inputstream.adaptive.stream_headers=user-agent=Mozilla/5.0 (Linux; Android 12; Kodi/21.0) ExoPlayerLib/2.9.6,referer=http://203.77.246.58/
-#KODIPROP:network-caching=2000
-#EXTINF:-1 tvg-id="" tvg-name="" tvg-logo="https://mimipipi22.github.io/logo/sports/champions2.jpg" group-title="⭐|SPORTS CHANNEL",,CHAMPIONS TV 2
-http://202.169.224.202:8800/udp/239.9.1.10:1234
-
-#KODIPROP:inputstream.adaptive.stream_selection_type=adaptive
-#KODIPROP:inputstream=ffmpegdirect
-#KODIPROP:inputstream.ffmpeg_options=-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5
-#KODIPROP:inputstream.adaptive.stream_headers=user-agent=Mozilla/5.0 (Linux; Android 12; Kodi/21.0) ExoPlayerLib/2.9.6,referer=http://203.77.246.58/
-#KODIPROP:network-caching=2000
-#EXTINF:-1 tvg-id="" tvg-name="" tvg-logo="https://mimipipi22.github.io/logo/sports/champions3.jpg" group-title="⭐|SPORTS CHANNEL",,CHAMPIONS TV 3
-http://202.169.224.202:8800/udp/239.9.1.11:1234
-
-#EXTINF:-1 tvg-name="BRI LIGA 1" tvg-logo="https://i.imgur.com/93ahrpm.gif" group-title="SPORTS LIVE", PEGADAIAN CHAMPIONSHIP⁽ˢᵉʳᵛᵉʳ ²⁾
-#EXTVLCOPT:http-referrer=https://morgan.h3eaulperhapsfuzkhurried.shop/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Mobile Safari/537.36
-https://fhlsport010.tbwe13ddm03.work/token-JRVykuSXffWG7WR9xvY6nG%2BFlMOA1y7jby37wadLRDb0sLLLHUFSCJQtrAtBW1IcRGPdxTJjmv9wepBPBQEQ6MhmSkO0a/cfall/s2001/v3b/qp67841snUE0pQbiY3AaYKEmqwphZ3umqT0ho25y/super/3x_632197.m3u8
-#EXTVLCOPT:http-user-agent=VidioPlayer/6.31.6
-#KODIPROP:inputstream.adaptive.license_type=com.widevine.alpha
-#KODIPROP:inputstream.adaptive.license_key=https://spacetv.my.id/drm.kt?id=19543&type=drm
-#https://spacetv.my.id/index.mpd?id=19543&type=dash
-#https://bit.ly/DonzTelevisionSportsOffline
-  
-#EXTINF:-1 tvg-name="BRI LIGA 1" tvg-logo="https://i.imgur.com/93ahrpm.gif" group-title="SPORTS LIVE", PEGADAIAN CHAMPIONSHIP⁽ˢᵉʳᵛᵉʳ ³⁾
-https://raw.githubusercontent.com/DonzCompIndonesia/donztelevision/refs/heads/main/v1/BRISuper1.m3u8
-#https://bit.ly/DonzTelevisionSportsOffline
-  
-#EXTINF:0 tvg-id="id" tvg-logo="https://i.imgur.com/NykuEx8.jpg" group-title="SPORTS LIVE",LIVE STREAM
-#EXTVLCOPT:http-referrer=https://morgan.h3eaulperhapsfuzkhurried.shop/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Mobile Safari/537.36
-https://fhlsport010.tbwe13ddm03.work/token-JRVykuSXffWG7WR9xvY6nG%2BFlMOA1y7jby37wadLRDb0sLLLHUFSCJQtrAtBW1IcRGPdxTJjmv9wepBPBQEQ6MhmSkO0a/cfall/s2001/v3b/qp67841snUE0pQbiY3AaYKEmqwphZ3umqT0ho25y/super/3x_632544.m3u8
-#https://jmp2.uk/plu-677f929054f43dad4b325c1c.m3u8
-#https://sonar.ytlive.workers.dev/stream/8gv3HJKA_Cw/master.m3u8
-#EXTVLCOPT:http-origin=https://demo.crunchyrolll.xyz
-#EXTVLCOPT:http-referrer=https://demo.crunchyrolll.xyz/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
-#https://hotlivezz179026907.akainu.xyz/Lxpb30konzwqAqq6B9WbXg/Fv2lucGIbhPi2caWYvF5Lg/1762274796803/live/may24/chunklist.m3u8
-#EXTVLCOPT:http-origin=https://www.vidio.com
-#EXTVLCOPT:http-referrer=https://www.vidio.com/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Mobile Safari/537.36
-#https://etslive-v3-vidio-com-tokenized.akamaized.net/stream/19269/file/live/19269/master.m3u8?hdnts=exp=1753803615~acl=/stream/19269/file/*~id=187018566~hmac=124dd3b5dab78e0df7c3adc6d8dc581e5f49852ed39459df99e73b4ab1b99886
-#https://iptv.lancartech.co.id:443/Farhan@90/18062025/78
-#EXTVLCOPT:http-origin=https://ppdd02.dtfjinikdinbiframe.shop
-#EXTVLCOPT:http-referrer=https://ppdd02.dtfjinikdinbiframe.shop/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36
-#https://twnx2-cf.boblcfwudz421.com/auth%3D0025a44969e818f0045d50c37c03590bda87932043e3f15b20e5fbbfa821d2cae6b85f496e5e7ad427f4b4b15ab93b9e3cbc49ce9e7c97a5e67e5ef9c33cc2505516c4fc1698a423aa387a9cd7d010988248abddbffce8ef6b103bbbdbed22919818a0774e078b0e112d757c5bee46eec0fbd3d5441be894fee0f88b869f97909980fea61352a99b929e8d8c2f150299d452c1c15ee1f7e193acb87f68d8856b%26cid%3DA4NWYFfvTKne0gvMqyP9L250726%26_v%3D2%26_r%3DYlSscN%26_vis%3D9b423ce02589ed4dbe540c4fe0cf76b2285f3325a2f516a1f24b63f60e285c0f%26_vvs%3Dc3499f28b030724f7838e1107eb1da01df18b3297747ec4378867ca3d0db46e4/app/c361629.m3u8
-#https://bit.ly/DonzTelevisionOffline
-  
-#EXTINF:-1 tvg-name="BRI LIGA 1" tvg-logo="https://i.imgur.com/f2vDcX1.gif" group-title="SPORTS LIVE", BRI SUPER LEAGUE⁽ˢᵉʳᵛᵉʳ ¹⁾
-#EXTVLCOPT:http-referrer=https://morgan.h3eaulperhapsfuzkhurried.shop/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Mobile Safari/537.36 
-https://fhlsport010.tbwe13ddm03.work/token-JRVykuSXffWG7WR9xvY6nG%2BFlMOA1y7jby37wadLRDb0sLLLHUFSCJQtrAtBW1IcRGPdxTJjmv9wepBPBQEQ6MhmSkO0a/cfall/s2001/v3b/053o3rr5nUE0pQbiY3AaYKEmqwphZ3umqT0ho25y/super/3x_632771.m3u8
-#https://bit.ly/DonzTelevisionSportsOffline
-
-#EXTINF:-1 tvg-name="BRI LIGA 1" tvg-logo="https://i.imgur.com/f2vDcX1.gif" group-title="SPORTS LIVE", BRI SUPER LEAGUE⁽ˢᵉʳᵛᵉʳ ²⁾
-https://raw.githubusercontent.com/DonzCompIndonesia/donztelevision/refs/heads/main/v1/BRISuper2.m3u8
-#EXTVLCOPT:network-caching=1000
-#EXTVLCOPT--http-reconnect=true
-#EXTVLCOPT:http-origin=https://ppdd02.dtfjinikdinbiframe.shop
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36
-#https://zozotv.xyz:443/live/DW3152A/@my8074/4633.ts
   
 #EXTINF:-1 tvg-name="BRI LIGA 1" tvg-logo="https://i.imgur.com/1lM967x.gif" group-title="SPORTS LIVE", INDOSIAR|BSL⁽ˢᵉʳᵛᵉʳ ³⁾
 #EXTVLCOPT:http-origin=https://ppdd09.playerktidfintkd.shop
@@ -1896,6 +1817,7 @@ https://db38umy8gexon.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a
 
 #EXTINF:-1 tvg-id="Sportstv.tr" tvg-name="Sportstv" tvg-logo="https://mimipipi22.github.io/logo/sports/sportstvtr.jpg" group-title="⭐|SPORTS CHANNEL",,SPORTS TV TURKEY
 http://live.sportstv.com.tr/hls/low/sportstv_fhd/index.m3u8
+
 
 
 
