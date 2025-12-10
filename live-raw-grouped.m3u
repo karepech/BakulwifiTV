@@ -1,6 +1,6 @@
-#EXTM3U url-version="2025-12-10T11:31:35.813Z"
+#EXTM3U url-version="2025-12-10T11:34:48.004Z"
 
-#EXTINF:-1 group-title="SPORT CHANNELS", === DAFTAR CHANNEL (276) ===
+#EXTINF:-1 group-title="SPORT CHANNELS", === DAFTAR CHANNEL (268) ===
 http://localhost/info
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=1a83ee088e5343d095ac7f4d8d3cd945:dc0da9fdfae3c69c322b67db207a87a1
@@ -22,28 +22,6 @@ https://ls-mp04.eo-edgefunctions7.com/out/v1/4604623e7ff4462a962275664ccd8ee5/ma
 #KODIPROP:inputstream.adaptive.license_key=93dccb38f8c84d448d5a7422eb44462b:af8f1c6acedc34551a82f3bb49adfdea
 #EXTINF:-1  tvg-id="580751" group-title="SPORT CHANNELS" tvg-logo="https://prod98.togglestatic.com/shain/v1/dataservice/ResizeImage/$value?Format='png'&Quality=85&ImageId='10298994'&EntityType='Item'&EntityId='580751'&Width=289&Height=250", SEA Games CH05
 https://ls-mp03.eo-edgefunctions7.com/out/v1/926637c1aba44cffa74adc74bf786816/manifest.mpd
-#EXTINF:-1 tvg-id="" tvg-name="" tvg-logo="https://mimipipi22.github.io/logo/sports/champions1.jpg" group-title="SPORT CHANNELS",,CHAMPIONS TV 1
-http://202.169.224.202:8800/udp/239.9.1.9:1234
-#EXTINF:-1 tvg-id="" tvg-name="" tvg-logo="https://mimipipi22.github.io/logo/sports/champions2.jpg" group-title="SPORT CHANNELS",,CHAMPIONS TV 2
-http://202.169.224.202:8800/udp/239.9.1.10:1234
-#EXTINF:-1 tvg-id="" tvg-name="" tvg-logo="https://mimipipi22.github.io/logo/sports/champions3.jpg" group-title="SPORT CHANNELS",,CHAMPIONS TV 3
-http://202.169.224.202:8800/udp/239.9.1.11:1234
-#EXTVLCOPT:http-referrer=https://morgan.h3eaulperhapsfuzkhurried.shop/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Mobile Safari/537.36
-#EXTINF:-1 tvg-name="BRI LIGA 1" tvg-logo="https://i.imgur.com/93ahrpm.gif" group-title="SPORT CHANNELS", PEGADAIAN CHAMPIONSHIP⁽ˢᵉʳᵛᵉʳ ²⁾
-https://fhlsport010.tbwe13ddm03.work/token-JRVykuSXffWG7WR9xvY6nG%2BFlMOA1y7jby37wadLRDb0sLLLHUFSCJQtrAtBW1IcRGPdxTJjmv9wepBPBQEQ6MhmSkO0a/cfall/s2001/v3b/qp67841snUE0pQbiY3AaYKEmqwphZ3umqT0ho25y/super/3x_632197.m3u8
-#EXTINF:-1 tvg-name="BRI LIGA 1" tvg-logo="https://i.imgur.com/93ahrpm.gif" group-title="SPORT CHANNELS", PEGADAIAN CHAMPIONSHIP⁽ˢᵉʳᵛᵉʳ ³⁾
-https://raw.githubusercontent.com/DonzCompIndonesia/donztelevision/refs/heads/main/v1/BRISuper1.m3u8
-#EXTVLCOPT:http-referrer=https://morgan.h3eaulperhapsfuzkhurried.shop/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Mobile Safari/537.36
-#EXTINF:0 tvg-id="id" tvg-logo="https://i.imgur.com/NykuEx8.jpg" group-title="SPORT CHANNELS",LIVE STREAM
-https://fhlsport010.tbwe13ddm03.work/token-JRVykuSXffWG7WR9xvY6nG%2BFlMOA1y7jby37wadLRDb0sLLLHUFSCJQtrAtBW1IcRGPdxTJjmv9wepBPBQEQ6MhmSkO0a/cfall/s2001/v3b/qp67841snUE0pQbiY3AaYKEmqwphZ3umqT0ho25y/super/3x_632544.m3u8
-#EXTVLCOPT:http-referrer=https://morgan.h3eaulperhapsfuzkhurried.shop/
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Mobile Safari/537.36
-#EXTINF:-1 tvg-name="BRI LIGA 1" tvg-logo="https://i.imgur.com/f2vDcX1.gif" group-title="SPORT CHANNELS", BRI SUPER LEAGUE⁽ˢᵉʳᵛᵉʳ ¹⁾
-https://fhlsport010.tbwe13ddm03.work/token-JRVykuSXffWG7WR9xvY6nG%2BFlMOA1y7jby37wadLRDb0sLLLHUFSCJQtrAtBW1IcRGPdxTJjmv9wepBPBQEQ6MhmSkO0a/cfall/s2001/v3b/053o3rr5nUE0pQbiY3AaYKEmqwphZ3umqT0ho25y/super/3x_632771.m3u8
-#EXTINF:-1 tvg-name="BRI LIGA 1" tvg-logo="https://i.imgur.com/f2vDcX1.gif" group-title="SPORT CHANNELS", BRI SUPER LEAGUE⁽ˢᵉʳᵛᵉʳ ²⁾
-https://raw.githubusercontent.com/DonzCompIndonesia/donztelevision/refs/heads/main/v1/BRISuper2.m3u8
 #EXTVLCOPT:http-origin=https://ppdd09.playerktidfintkd.shop
 #EXTVLCOPT:http-referrer=https://ppdd09.playerktidfintkd.shop/live.html?_pa=bWF0Y2hJZD0yODI2MjQ1Jm10VGV4dD1mb290YmFsbCZzaXRlS2V5PThzbDImc2twdE51bT0zcmQ%3D&_pb=1
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
