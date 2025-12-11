@@ -1,7 +1,205 @@
-#EXTM3U url-version="2025-12-11T03:01:30.718Z"
+#EXTM3U url-version="2025-12-11T03:05:20.440Z"
 
-#EXTINF:-1 group-title="SPORT CHANNELS", === DAFTAR CHANNEL (268) ===
+#EXTINF:-1 group-title="SPORT CHANNELS", === DAFTAR CHANNEL (367) ===
 http://localhost/info
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/7Yf0V1d.png",BRl LlGA 1 HD
+https://bit.ly/BRILIGA1DONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",LLGA SUPER MALAYSLA
+https://bit.ly/LIGASUPERMALAYSIANEW
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",UCL EVENT
+https://bit.ly/UCLEVENTNEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",WORLD CUP U17 2025
+https://bit.ly/WORLDCUPU172025DONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",AFC LEAGUE TWO
+https://bit.ly/AFCLEAGUETWODONZNEW
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",AFC LEAGUE ELITE
+https://bit.ly/AFCLEAGUEELITEDONZNEW
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",CHAMPIONS TV HD
+https://bit.ly/CHAMPlONSTVHDNEW
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",SPORTSTARS 1 HD
+https://bit.ly/SPORTSTARS1NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",SPORTSTARS 2 HD
+https://bit.ly/SPORTSTARS2NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",SPORTSTARS 3 HD
+https://bit.ly/SPORTSTARS3NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",SPORTSTARS 4 HD
+https://bit.ly/SPORTSTARS4NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",SPORTSTARS BOLA HD
+https://bit.ly/SPORTSTARSBOLANEW
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",SPORTSTARS FIGHT HD
+https://bit.ly/SPORTSTARSFIGHTNEW
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",SPORTSTARS ESPORTS HD
+https://bit.ly/SPORTSTARSESPORTSNEW
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",FOOTBALL HD
+https://bit.ly/FOOTBALLHDNEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",CHAMPIONS TV 1
+https://bit.ly/CHAMPlONSTV1NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",CHAMPIONS TV 2
+https://bit.ly/CHAMPlONSTV2NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",CHAMPIONS TV 3
+https://bit.ly/CHAMPlONSTV3NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",CHAMPIONS TV 4
+https://bit.ly/CHAMPlONSTV4NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",CHAMPIONS TV 5
+https://bit.ly/CHAMPlONSTV5NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",CHAMPIONS TV 6
+https://bit.ly/CHAMPlONSTV6NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",CHAMPIONS TV 7
+https://bit.ly/CHAMPlONSTV7NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",CHAMPIONS TV 8
+https://bit.ly/CHAMPlONSTV8NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",ASTRO SUPER SPORT 1 HD
+https://bit.ly/ASTROSUPERSPORT1NEW
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",ASTRO SUPER SPORT 2 HD
+https://bit.ly/ASTROSUPERSPORT2NEW
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",ASTRO SUPER SPORT 3 HD
+https://bit.ly/ASTROSUPERSPORT3NEW
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",ASTRO SUPER SPORT 4 HD
+https://bit.ly/ASTROSUPERSPORT4NEW
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",SONY TEN 1 HD
+https://bit.ly/SONYTEN1NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",SONY TEN 2 HD
+https://bit.ly/SONYTEN2NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",SONY TEN 3 HD
+https://bit.ly/SONYTEN3NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",SONY TEN 4 HD
+https://bit.ly/SONYTEN4NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",SONY TEN 5 HD
+https://bit.ly/SONYTEN5NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",BEIN SPORTS 1 HD
+https://bit.ly/BEINSPORTS1NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",BEIN SPORTS 2 HD
+https://bit.ly/BEINSPORTS2NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",BEIN SPORTS 3 HD
+https://bit.ly/BEINSPORTS3NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",SPOTV 1 HD
+https://bit.ly/SPOTV1NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",SPOTV 2 HD
+https://bit.ly/SPOTV2NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",SKY SPORTS MAIN EVENT HD
+https://bit.ly/SKYSPORTSMAINEVENTNEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",SKY SPORTS ACTION HD
+https://bit.ly/SKYSPORTSACTIONNEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",SKY SPORTS ARENA HD
+https://bit.ly/SKYSPORTSARENANEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",SKY SPORTS GOLF HD
+https://bit.ly/SKYSPORTSGOLFNEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",SKY SPORTS F1 HD
+https://bit.ly/SKYSPORTSF1NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",SKY SPORTS PREMIER LEAGUE HD
+https://bit.ly/SKYSPORTSPREMIERLEAGUENEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",SKY SPORTS FOOTBALL HD
+https://bit.ly/SKYSPORTSFOOTBALLNEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",BT SPORTS 1 HD
+https://bit.ly/BTSPORTS1NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",BT SPORTS 2 HD
+https://bit.ly/BTSPORTS2NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",BT SPORTS 3 HD
+https://bit.ly/BTSPORTS3NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",BT SPORTS 4 HD
+https://bit.ly/BTSPORTS4NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",DAZN 1 HD
+https://bit.ly/DAZN1NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",DAZN 2 HD
+https://bit.ly/DAZN2NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",DAZN 3 HD
+https://bit.ly/DAZN3NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",DAZN 4 HD
+https://bit.ly/DAZN4NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",ESPN HD
+https://bit.ly/ESPNHDNEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",FOX SPORTS 1 HD
+https://bit.ly/FOXSPORTS1NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",FOX SPORTS 2 HD
+https://bit.ly/FOXSPORTS2NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",FOX SPORTS 3 HD
+https://bit.ly/FOXSPORTS3NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",NBA TV
+https://bit.ly/NBATVNEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",ESPN 2 HD
+https://bit.ly/ESPN2NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",GOLF CHANNEL
+https://bit.ly/GOLFCHANNELNEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",ARENA SPORT 1 HD
+https://bit.ly/ARENASPORT1NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",ARENA SPORT 2 HD
+https://bit.ly/ARENASPORT2NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",ARENA SPORT 3 HD
+https://bit.ly/ARENASPORT3NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",ARENA SPORT 4 HD
+https://bit.ly/ARENASPORT4NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",ARENA SPORT 5 HD
+https://bit.ly/ARENASPORT5NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",SPORT TV 1
+https://bit.ly/SPORTTV1NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",SPORT TV 2
+https://bit.ly/SPORTTV2NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",SPORT TV 3
+https://bit.ly/SPORTTV3NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",SPORT TV 4
+https://bit.ly/SPORTTV4NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",SPORT TV 5
+https://bit.ly/SPORTTV5NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",SPORT TV 6
+https://bit.ly/SPORTTV6NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",SPORT TV +
+https://bit.ly/SPORTTVPLUSNEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",EURO SPORT 1 HD
+https://bit.ly/EUROSPORT1NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",EURO SPORT 2 HD
+https://bit.ly/EUROSPORT2NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",MOTOR SPORT TV HD
+https://bit.ly/MOTORSPORTTVNEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",ABU DHABI SPORTS 1 HD
+https://bit.ly/ABUDHABISPORTS1NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",ABU DHABI SPORTS 2 HD
+https://bit.ly/ABUDHABISPORTS2NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",ABU DHABI SPORTS 3 HD
+https://bit.ly/ABUDHABISPORTS3NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",ABU DHABI SPORTS 4 HD
+https://bit.ly/ABUDHABISPORTS4NEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",BEIN SPORTS NEW
+https://bit.ly/BEINSPORTSNEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",MAJID KIDS CHANNEL
+https://bit.ly/MAJIDKIDSCHANNELNEW
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",KAZAKHSTAN SPORT
+https://bit.ly/KAZAKHSTANSPORTNEW
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",TURKMENISTAN SPORT
+https://bit.ly/TURKMENISTANSPORTNEW
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",RUGBYPASS TV HD
+https://bit.ly/RUGBYPASSTVNEW
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",ONE FOOTBALL TV
+https://bit.ly/ONEFOOTBALLTVNEW
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",FIGHT SPORTS HD
+https://bit.ly/FIGHTSPORTSHDNEW
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",FAST SPORTS TV
+https://bit.ly/FASTSPORTSTVNEW
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",TRUE SPORT 1 HD
+https://bit.ly/TRUESPORT1HDNEW
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",TRUE SPORT 2 HD
+https://bit.ly/TRUESPORT2HDNEW
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",TRUE SPORT 3 HD
+https://bit.ly/TRUESPORT3HDNEW
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",TRUE SPORT 4 HD
+https://bit.ly/TRUESPORT4HDNEW
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",TRUE SPORT 5 HD
+https://bit.ly/TRUESPORT5HDNEW
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",TRUE SPORT 6 HD
+https://bit.ly/TRUESPORT6HDNEW
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",TRUE SPORT 7 HD
+https://bit.ly/TRUESPORT7HDNEW
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",TRUE SPORT S HD
+https://bit.ly/TRUESPORTSHDNEW
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",TRUE SPORT TENNIS
+https://bit.ly/TRUESPORTTENNISNEW
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",TRUE SPORT GOLF
+https://bit.ly/TRUESPORTGOLFNEW
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",TRUE SPORT MUAY THAI HD
+https://bit.ly/TRUESPORTMUAYTHAIHDNEW
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",WWE CHANNEL NEW
+https://bit.ly/WWECHANNELNEWDONZ
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://i.imgur.com/DzaQl8o.png",CHANNEL SPORT HD
+https://bit.ly/CHANNELSPORTSHDNEW
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=1a83ee088e5343d095ac7f4d8d3cd945:dc0da9fdfae3c69c322b67db207a87a1
 #EXTINF:-1  tvg-id="576059" group-title="SPORT CHANNELS" tvg-logo="https://prod98.togglestatic.com/shain/v1/dataservice/ResizeImage/$value?Format='png'&Quality=85&ImageId='10298961'&EntityType='Item'&EntityId='576059'&Width=289&Height=250", SEA Games CH01
