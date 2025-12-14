@@ -1,4 +1,4 @@
-#EXTM3U url-version="2025-12-14T20:14:29.654Z"
+#EXTM3U url-version="2025-12-14T20:31:59.739Z"
 
 #EXTINF:-1 group-title="SPORT CHANNELS", === DAFTAR CHANNEL (540) ===
 http://localhost/info
@@ -28,7 +28,7 @@ https://ls-mp03.eo-edgefunctions7.com/out/v1/926637c1aba44cffa74adc74bf786816/ma
 #KODIPROP:inputstream.ffmpegdirect.program_number=350997
 #KODIPROP:inputstream.ffmpegdirect.is_realtime_stream=true
 #EXTVLCOPT:http-referrer=https://www.rctiplus.com/
-#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgofRMXYA-3dc3fNg7OKCfuposx1mdDx-GrTn3DeJ9HMIrRyJfL4o-diHV4nMN7kmaNeUi4r-2xPC1ZQYc4-SyG24QvAHxBkqACgDxFqLBOL1tRZMLAQcAa9BxzYNTJhgsuBRBTquxuqyCHY2DsPgtJF1mC7MuNDamj88_5x1d-qxdssTFcPvEs5S4huDdO/s700/TIMNAS.png",TIMNAS DAY 2
+#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://s.id/Logobw",TIMNAS DAY 2
 https://liveplus.rctiplus.id/rcti2023.m3u8
 #EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgofRMXYA-3dc3fNg7OKCfuposx1mdDx-GrTn3DeJ9HMIrRyJfL4o-diHV4nMN7kmaNeUi4r-2xPC1ZQYc4-SyG24QvAHxBkqACgDxFqLBOL1tRZMLAQcAa9BxzYNTJhgsuBRBTquxuqyCHY2DsPgtJF1mC7MuNDamj88_5x1d-qxdssTFcPvEs5S4huDdO/s700/TIMNAS.png",TIMNAS DAY 3
 https://lenz.splus.ir/PLTV/88888888/224/3221226845/3.m3u8
