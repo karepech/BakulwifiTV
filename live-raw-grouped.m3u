@@ -1,7 +1,27 @@
-#EXTM3U url-version="2025-12-14T16:40:14.298Z"
+#EXTM3U url-version="2025-12-14T16:46:33.001Z"
 
 #EXTINF:-1 group-title="SPORT CHANNELS", === DAFTAR CHANNEL (542) ===
 http://localhost/info
+#KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
+#KODIPROP:inputstream.adaptive.license_key=1a83ee088e5343d095ac7f4d8d3cd945:dc0da9fdfae3c69c322b67db207a87a1
+#EXTINF:-1  tvg-id="576059" group-title="SPORT CHANNELS" tvg-logo="https://prod98.togglestatic.com/shain/v1/dataservice/ResizeImage/$value?Format='png'&Quality=85&ImageId='10298961'&EntityType='Item'&EntityId='576059'&Width=289&Height=250", SEA Games CH01
+https://ls-mp03.eo-edgefunctions7.com/out/v1/7cfe6d15c127407588568af9f4574a21/manifest.mpd
+#KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
+#KODIPROP:inputstream.adaptive.license_key=6c9c38c2de3f41afa12f9872ad6c3903:d6f5a6750b32d2addec0c98fff14de9d
+#EXTINF:-1  tvg-id="576060" group-title="SPORT CHANNELS" tvg-logo="https://prod98.togglestatic.com/shain/v1/dataservice/ResizeImage/$value?Format='png'&Quality=85&ImageId='10298974'&EntityType='Item'&EntityId='576060'&Width=289&Height=250", SEA Games CH02
+https://ls-mp01.eo-edgefunctions7.com/out/v1/5fa3fdc8720b4317b14df756e81b78c1/manifest.mpd
+#KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
+#KODIPROP:inputstream.adaptive.license_key=3da197d13d754505887a04aedd17922e:0028b47ca60594991910c6f6048c51a0
+#EXTINF:-1  tvg-id="576061" group-title="SPORT CHANNELS" tvg-logo="https://prod98.togglestatic.com/shain/v1/dataservice/ResizeImage/$value?Format='png'&Quality=85&ImageId='10298979'&EntityType='Item'&EntityId='576061'&Width=289&Height=250", SEA Games CH03
+https://ls-mp02.eo-edgefunctions7.com/out/v1/2f39077458694b06bdfb15ef16f55d45/manifest.mpd
+#KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
+#KODIPROP:inputstream.adaptive.license_key=ea1f7f86732d47e897e38c3168851569:55b7ed4cc25fa476f6682c447af128d5
+#EXTINF:-1  tvg-id="580750" group-title="SPORT CHANNELS" tvg-logo="https://prod98.togglestatic.com/shain/v1/dataservice/ResizeImage/$value?Format='png'&Quality=85&ImageId='10298988'&EntityType='Item'&EntityId='580750'&Width=289&Height=250", SEA Games CH04
+https://ls-mp04.eo-edgefunctions7.com/out/v1/4604623e7ff4462a962275664ccd8ee5/manifest.mpd
+#KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
+#KODIPROP:inputstream.adaptive.license_key=93dccb38f8c84d448d5a7422eb44462b:af8f1c6acedc34551a82f3bb49adfdea
+#EXTINF:-1  tvg-id="580751" group-title="SPORT CHANNELS" tvg-logo="https://prod98.togglestatic.com/shain/v1/dataservice/ResizeImage/$value?Format='png'&Quality=85&ImageId='10298994'&EntityType='Item'&EntityId='580751'&Width=289&Height=250", SEA Games CH05
+https://ls-mp03.eo-edgefunctions7.com/out/v1/926637c1aba44cffa74adc74bf786816/manifest.mpd
 #EXTVLCOPT:http-user-agent=NSPlayer/12.00.9651.000
 #KODIPROP:inputstream=inputstream.ffmpegdirect
 #KODIPROP:mimetype=video/mp2t
@@ -1243,26 +1263,6 @@ https://a129aivottlinear-a.akamaihd.net/OTTB/lhr-nitro/live/dash/enc/lsdasbvglv/
 #KODIPROP:inputstream.adaptive.license_key=192b1115da041585c77200128549efa1:634e10efe4abbb14be400a3ccbac0258
 #EXTINF:-1 tvg-logo="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi4bji3RTpl10N4yjso1xddTRVTvF7VYzz_24b-cIsxvEAWX1fzBa1fPp4WSCcu82bFi6i8ZkP3P3RXSZAK9bLCUteWw0Ivvk5_dxBXHUmmigpbBpanSybuzj32PTNrv9b9boEf927E8w1V-4QapRUn1LzS9M6V8nvQM-6ABn1fY-5JJ59cGSAaZ7Badntv/s700/CHAMPIONS%20LEAGUE.png" group-title="SPORT CHANNELS",CHAMPIONS 7 TNT 4
 https://a129aivottlinear-a.akamaihd.net/OTTB/lhr-nitro/live/dash/enc/i2pcjr4pe5/out/v1/912e9db56d75403b8a9ac0a719110f36/cenc.mpd
-#KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
-#KODIPROP:inputstream.adaptive.license_key=1a83ee088e5343d095ac7f4d8d3cd945:dc0da9fdfae3c69c322b67db207a87a1
-#EXTINF:-1  tvg-id="576059" group-title="SPORT CHANNELS" tvg-logo="https://prod98.togglestatic.com/shain/v1/dataservice/ResizeImage/$value?Format='png'&Quality=85&ImageId='10298961'&EntityType='Item'&EntityId='576059'&Width=289&Height=250", SEA Games CH01
-https://ls-mp03.eo-edgefunctions7.com/out/v1/7cfe6d15c127407588568af9f4574a21/manifest.mpd
-#KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
-#KODIPROP:inputstream.adaptive.license_key=6c9c38c2de3f41afa12f9872ad6c3903:d6f5a6750b32d2addec0c98fff14de9d
-#EXTINF:-1  tvg-id="576060" group-title="SPORT CHANNELS" tvg-logo="https://prod98.togglestatic.com/shain/v1/dataservice/ResizeImage/$value?Format='png'&Quality=85&ImageId='10298974'&EntityType='Item'&EntityId='576060'&Width=289&Height=250", SEA Games CH02
-https://ls-mp01.eo-edgefunctions7.com/out/v1/5fa3fdc8720b4317b14df756e81b78c1/manifest.mpd
-#KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
-#KODIPROP:inputstream.adaptive.license_key=3da197d13d754505887a04aedd17922e:0028b47ca60594991910c6f6048c51a0
-#EXTINF:-1  tvg-id="576061" group-title="SPORT CHANNELS" tvg-logo="https://prod98.togglestatic.com/shain/v1/dataservice/ResizeImage/$value?Format='png'&Quality=85&ImageId='10298979'&EntityType='Item'&EntityId='576061'&Width=289&Height=250", SEA Games CH03
-https://ls-mp02.eo-edgefunctions7.com/out/v1/2f39077458694b06bdfb15ef16f55d45/manifest.mpd
-#KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
-#KODIPROP:inputstream.adaptive.license_key=ea1f7f86732d47e897e38c3168851569:55b7ed4cc25fa476f6682c447af128d5
-#EXTINF:-1  tvg-id="580750" group-title="SPORT CHANNELS" tvg-logo="https://prod98.togglestatic.com/shain/v1/dataservice/ResizeImage/$value?Format='png'&Quality=85&ImageId='10298988'&EntityType='Item'&EntityId='580750'&Width=289&Height=250", SEA Games CH04
-https://ls-mp04.eo-edgefunctions7.com/out/v1/4604623e7ff4462a962275664ccd8ee5/manifest.mpd
-#KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
-#KODIPROP:inputstream.adaptive.license_key=93dccb38f8c84d448d5a7422eb44462b:af8f1c6acedc34551a82f3bb49adfdea
-#EXTINF:-1  tvg-id="580751" group-title="SPORT CHANNELS" tvg-logo="https://prod98.togglestatic.com/shain/v1/dataservice/ResizeImage/$value?Format='png'&Quality=85&ImageId='10298994'&EntityType='Item'&EntityId='580751'&Width=289&Height=250", SEA Games CH05
-https://ls-mp03.eo-edgefunctions7.com/out/v1/926637c1aba44cffa74adc74bf786816/manifest.mpd
 #EXTVLCOPT:http-origin=https://ppdd09.playerktidfintkd.shop
 #EXTVLCOPT:http-referrer=https://ppdd09.playerktidfintkd.shop/live.html?_pa=bWF0Y2hJZD0yODI2MjQ1Jm10VGV4dD1mb290YmFsbCZzaXRlS2V5PThzbDImc2twdE51bT0zcmQ%3D&_pb=1
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
