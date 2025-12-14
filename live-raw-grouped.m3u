@@ -1,12 +1,7 @@
-#EXTM3U url-version="2025-12-14T16:30:29.007Z"
+#EXTM3U url-version="2025-12-14T16:35:38.427Z"
 
-#EXTINF:-1 group-title="SPORT CHANNELS", === DAFTAR CHANNEL (543) ===
+#EXTINF:-1 group-title="SPORT CHANNELS", === DAFTAR CHANNEL (542) ===
 http://localhost/info
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
-#EXTVLCOPT:http-origin=https://www.instreamtv.xyz
-#EXTVLCOPT:http-referrer=https://www.instreamtv.xyz/
-#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgofRMXYA-3dc3fNg7OKCfuposx1mdDx-GrTn3DeJ9HMIrRyJfL4o-diHV4nMN7kmaNeUi4r-2xPC1ZQYc4-SyG24QvAHxBkqACgDxFqLBOL1tRZMLAQcAa9BxzYNTJhgsuBRBTquxuqyCHY2DsPgtJF1mC7MuNDamj88_5x1d-qxdssTFcPvEs5S4huDdO/s700/TIMNAS.png",TIMNAS DAY 1
-https://dl.dropboxusercontent.com/scl/fi/u5e7h1838gmpdic8e6wz1/SALURAN-OFFLINE.mp4?rlkey=32ftn2r4avzlirb8woqo1svjh&st=co0mrf1r&dl=0
 #EXTVLCOPT:http-user-agent=NSPlayer/12.00.9651.000
 #KODIPROP:inputstream=inputstream.ffmpegdirect
 #KODIPROP:mimetype=video/mp2t
