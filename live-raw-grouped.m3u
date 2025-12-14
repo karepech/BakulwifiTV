@@ -1,6 +1,6 @@
-#EXTM3U url-version="2025-12-14T19:10:10.449Z"
+#EXTM3U url-version="2025-12-14T19:24:24.209Z"
 
-#EXTINF:-1 group-title="SPORT CHANNELS", === DAFTAR CHANNEL (542) ===
+#EXTINF:-1 group-title="SPORT CHANNELS", === DAFTAR CHANNEL (540) ===
 http://localhost/info
 #KODIPROP:inputstream.adaptive.license_type=org.w3.clearkey
 #KODIPROP:inputstream.adaptive.license_key=1a83ee088e5343d095ac7f4d8d3cd945:dc0da9fdfae3c69c322b67db207a87a1
@@ -1112,10 +1112,6 @@ https://cdn.bdixtv24.com/SonyTen3HD/index.m3u8
 https://cdn.bdixtv24.com/SonyTen4HD/index.m3u8
 #EXTINF:-1 tvg-logo="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgmHNXc9QmB1MkL5A7yh0efEuoOlG1_TTsDl-Ko8hDs-PgcExwDY9pq0Vsqdw4OKDa00DapgYLubStqu-ZFsJc1GhwhTEY_DKyl6zhtOE56-Cn9Ji-Di3zS_gL4LtT57jMog3wxAhV-5zvPx3-Kp-fXyKxJMi3at9VSqj690kwEdVe6nr3_PZBhx-Bm6i23/s700/SONY%20TEN%205%20HD.png" group-title="SPORT CHANNELS", SONY TEN 5 HD
 https://cdn.bdixtv24.com/SonyTen5HD/index.m3u8
-#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgtRvt4IelbAXdN3vBA2lDevxJ558dGAzRiMl7QMRR5SL23HL4xm_uGK_2qXoRLWH_RCEMISME9RmwsWcWdFLsMUi4M-qHgt12Hq632JlHoOJtp4SOZ7f9PdDwluQIp6IhANuZIvS911usKvEzbb2iNYc4LwhTKWpNpY6SbeKMKvPdwg4S7EjxjB-p-2h5x/s700/join.png",! 01 JOIN GROUP
-https://dl.dropboxusercontent.com/scl/fi/gpiumnhtdrolxatwl595x/JOIN-GROUP.mp4?rlkey=vums52gf0gu45dtleznmdqe99&st=b8xbixla&dl=0
-#EXTINF:-1 group-title="SPORT CHANNELS" tvg-logo="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj4nIE78r6ZNqLJOGsnS897fBpl4mRMdd_-0l4JbkNVCNXlBB0rKzp5vLYQzbEyOLQdiklNdJKLZ4JsC4N5r1unTkw_Z6lvB8kLIPC__3xAqAuqPTrfUetV70jM52wXHC_PO-2Wgzd42Ve9G6aXZkEW5ImgYMmZ0Q79zfdZOsbCJjTY8i4aLb4CzOl8O70G/s700/donasi.png",! 02 TRAKTIR NGOPI
-https://dl.dropboxusercontent.com/scl/fi/ev44w0ebw6fmmchp6agwp/DONASI-DANA.mp4?rlkey=bft46gxlqnuoiic7vdr603wj0&st=5ysj9c1w&dl=0
 #EXTVLCOPT:http-referrer=https://github.com/
 #EXTINF:-1 tvg-logo="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgjYRIjYr_gCA6izOlvgA7uDN2BqVAzJiogul9Ylkl5DY-vIaMW_hQDL2LaDCqgcTb_gCYIvU9UAWgDUgHWtnatP-xy4_q50IWs-fwyRAkCjfAukHs4kAbK536BMIwer33u999_hbBS0nmubyeIVUWTLqUr2Q6r2QmnfRsRV2Nb_R42Twyks8VtLzq_zVmu/s700/EPL%20ANIM.gif" group-title="SPORT CHANNELS",EPL 1 HUB PREMIER 1
 https://github.com/cattviptv2605/sportworld/raw/refs/heads/main/hubpremier1.m3u8
