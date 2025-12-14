@@ -1,11 +1,4 @@
 
-
-#EXTINF:-1 group-title="SPORTS" tvg-logo="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgofRMXYA-3dc3fNg7OKCfuposx1mdDx-GrTn3DeJ9HMIrRyJfL4o-diHV4nMN7kmaNeUi4r-2xPC1ZQYc4-SyG24QvAHxBkqACgDxFqLBOL1tRZMLAQcAa9BxzYNTJhgsuBRBTquxuqyCHY2DsPgtJF1mC7MuNDamj88_5x1d-qxdssTFcPvEs5S4huDdO/s700/TIMNAS.png",TIMNAS DAY 1
-#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36
-#EXTVLCOPT:http-origin=https://www.instreamtv.xyz
-#EXTVLCOPT:http-referrer=https://www.instreamtv.xyz/
-https://dl.dropboxusercontent.com/scl/fi/u5e7h1838gmpdic8e6wz1/SALURAN-OFFLINE.mp4?rlkey=32ftn2r4avzlirb8woqo1svjh&st=co0mrf1r&dl=0
-
 #EXTINF:-1 group-title="SPORTS" tvg-logo="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgofRMXYA-3dc3fNg7OKCfuposx1mdDx-GrTn3DeJ9HMIrRyJfL4o-diHV4nMN7kmaNeUi4r-2xPC1ZQYc4-SyG24QvAHxBkqACgDxFqLBOL1tRZMLAQcAa9BxzYNTJhgsuBRBTquxuqyCHY2DsPgtJF1mC7MuNDamj88_5x1d-qxdssTFcPvEs5S4huDdO/s700/TIMNAS.png",TIMNAS DAY 2
 #EXTM3U
 #EXT-X-VERSION:3
@@ -4274,6 +4267,7 @@ https://db38umy8gexon.cloudfront.net/v1/master/3722c60a815c199d9c0ef36c5b73da68a
 
 #EXTINF:-1 tvg-id="Sportstv.tr" tvg-name="Sportstv" tvg-logo="https://mimipipi22.github.io/logo/sports/sportstvtr.jpg" group-title="SPORTS",,SPORTS TV TURKEY
 http://live.sportstv.com.tr/hls/low/sportstv_fhd/index.m3u8
+
 
 
 
